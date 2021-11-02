@@ -12,11 +12,35 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+/** Landing Page*/
 Route::get('/', [App\Http\Controllers\LandingController::class, 'index'])->name('landing.page');
+/** END Landing Page */
 
+/**Auth Route */
 Auth::routes();
-Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+/** END Auth Route */
 
+/** Dashboard */
+Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+/** END Dashboard */
+
+/** Google Login */
 Route::get('auth/google', [App\Http\Controllers\OAuthController::class, 'redirectToGoogle'])->name('google.login');
 Route::get('auth/google/callback', [App\Http\Controllers\OAuthController::class, 'googleCallback'])->name('google.callback');
+/** END Google Login */
+
+/** Manage Data User */
+Route::prefix('user')->group(function(){
+    // Read
+    Route::get('/', [App\Http\Controllers\UserController::class, 'index'])->name('user.read');
+
+    // Create
+    Route::post('/store', [App\Http\Controllers\UserController::class, 'store'])->name('user.store');
+
+    // Update
+    Route::post('/update', [App\Http\Controllers\UserController::class, 'update'])->name('user.update');
+
+    // Delete All
+    Route::post('/deleteall', [App\Http\Controllers\UserController::class, 'deleteAll'])->name('user.deleteall');
+});
+/** END Manage Data User */

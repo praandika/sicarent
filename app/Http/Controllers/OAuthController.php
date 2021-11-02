@@ -27,6 +27,7 @@ class OAuthController extends Controller
                     'username' => $user->getEmail(),
                     'email' => $user->getEmail(),
                     'google_id' => $user->getId(),
+                    'avatar' => $user->getAvatar(),
                     'password' => bcrypt('12345678')
                 ]);
                 Auth::login($newUser);

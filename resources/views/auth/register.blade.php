@@ -1,4 +1,7 @@
-@include('component.header')
+@extends('auth.auth-app')
+@section('title','Register')
+
+@section('login-content')
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="card card-outline card-primary">
@@ -86,10 +89,10 @@
         </a>
       </div>
 
-      <a href="login.html" class="text-center">I already have a membership</a>
+      <a href="{{ route('login') }}" class="text-center">I already have a membership</a>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->
 </div>
 <!-- /.register-box -->
-@include('component.footer')
+@endsection

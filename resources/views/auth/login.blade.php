@@ -1,4 +1,7 @@
-@include('component.header')
+@extends('auth.auth-app')
+@section('title','Login')
+
+@section('login-content')
 <body class="hold-transition login-page">
 <div class="login-box">
   <!-- /.login-logo -->
@@ -74,7 +77,7 @@
         @endif
       </p>
       <p class="mb-0">
-        <a href="register.html" class="text-center">Register a new membership</a>
+        <a href="{{ route('register') }}" class="text-center">Register a new membership</a>
       </p>
     </div>
     <!-- /.card-body -->
@@ -82,4 +85,4 @@
   <!-- /.card -->
 </div>
 <!-- /.login-box -->
-@include('component.footer')
+@endsection

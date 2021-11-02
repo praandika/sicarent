@@ -19,12 +19,23 @@ class DatabaseSeeder extends Seeder
         $this->call(PaymentTableSeeder::class);
         $this->call(BookingTableSeeder::class);
         \App\Models\User::insert([
-            'name' => 'Andika Pranayoga',
-            'username' => 'andika',
-            'email' => 'praandikayoga@gmail.com',
-            'email_verified_at' => Carbon::now('GMT+8'),
-            'password' => bcrypt('12345678'),
-            'access' => 'admin',
+            [
+                'name' => 'Andika Pranayoga',
+                'username' => 'andika',
+                'email' => 'praandikayoga@gmail.com',
+                'email_verified_at' => Carbon::now('GMT+8'),
+                'password' => bcrypt('12345678'),
+                'access' => 'admin',
+            ],
+            [
+                'name' => 'Pemimpin',
+                'username' => 'arya',
+                'email' => 'aryasuparta@gmail.com',
+                'email_verified_at' => Carbon::now('GMT+8'),
+                'password' => bcrypt('12345678'),
+                'access' => 'head',
+            ],
+            
         ]);
     }
 }
