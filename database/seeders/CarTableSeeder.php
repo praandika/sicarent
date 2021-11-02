@@ -51,7 +51,7 @@ class CarTableSeeder extends Seeder
                 'transmition' => 'AT',
                 'car_type' => 'City Car',
                 'engine_vol' => '1199',
-                'price' => 280000,
+                'price' => 200000,
                 'plate_number' => 'DK 3983 KJH',
                 'car_capacity' => '5 kursi',
                 'car_year' => '2020',

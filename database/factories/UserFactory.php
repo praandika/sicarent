@@ -20,7 +20,13 @@ class UserFactory extends Factory
             'username' => $this->faker->userName(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' => bcrypt('12345678'), // password
+            'address' => $this->faker->address(),
+            'gender' => $this->faker->randomElement(['1','0']),
+            'phone' => $this->faker->phoneNumber(),
+            'birthday' => $this->faker->dateTimeThisCentury('+25 years'),
+            'residence_idcard' => $this->faker->numberBetween(),
+            'account_number' => $this->faker->randomNumber(7, true),
             'remember_token' => Str::random(10),
             'created_at' => $this->faker->dateTimeThisMonth('+30 days'),
         ];

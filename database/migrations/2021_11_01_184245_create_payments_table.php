@@ -17,7 +17,10 @@ class CreatePaymentsTable extends Migration
             $table->id();
             $table->string('booking_id');
             $table->date('payment_date');
-            $table->
+            $table->integer('fines');
+            $table->integer('total');
+            $table->integer('changes');
+            $table->integer('overtime');
             $table->timestamps();
         });
     }
