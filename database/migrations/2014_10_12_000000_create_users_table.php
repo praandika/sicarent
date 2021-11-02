@@ -22,12 +22,12 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('access',['user','admin']);
-            $table->text('address');
-            $table->string('gender');
-            $table->string('phone');
-            $table->date('birthday');
-            $table->integer('residence_idcard');
-            $table->string('account_number');
+            $table->text('address')->nullable();
+            $table->string('gender')->nullable();
+            $table->string('phone')->nullable();
+            $table->date('birthday')->nullable();
+            $table->integer('residence_idcard')->nullable();
+            $table->string('account_number')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
