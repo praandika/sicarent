@@ -33,14 +33,13 @@ Route::get('auth/google/callback', [App\Http\Controllers\OAuthController::class,
 Route::prefix('user')->group(function(){
     // Read
     Route::get('/', [App\Http\Controllers\UserController::class, 'index'])->name('user.read');
-
     // Create
     Route::post('/store', [App\Http\Controllers\UserController::class, 'store'])->name('user.store');
-
+    /**Edit */
+    Route::get('/edit/{id}', [App\Http\Controllers\UserController::class, 'edit'])->name('user.edit');
     // Update
     Route::post('/update', [App\Http\Controllers\UserController::class, 'update'])->name('user.update');
-
-    // Delete All
-    Route::post('/deleteall', [App\Http\Controllers\UserController::class, 'deleteAll'])->name('user.deleteall');
+    /**Change Password Admin */
+    Route::post('adminpass', [App\Http\Controllers\UserController::class, 'adminpass'])->name('admin.password');
 });
 /** END Manage Data User */

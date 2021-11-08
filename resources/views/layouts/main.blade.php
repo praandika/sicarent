@@ -30,6 +30,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </head>
 
 <body class="hold-transition sidebar-mini">
+@include('sweetalert::alert')
     <div class="wrapper">
 
         @include('admin.component.navbar')
@@ -42,7 +43,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Starter Page</h1>
+                            <h1 class="m-0">@yield('title')</h1>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
@@ -76,13 +77,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 @stack('before-script')
 
     <!-- jQuery -->
-    <script src="plugins/jquery/jquery.min.js"></script>
+    <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
     <!-- Bootstrap 4 -->
-    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- AdminLTE App -->
-    <script src="dist/js/adminlte.min.js"></script>
+    <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
     <!-- date-range-picker -->
-    <script src="../../plugins/daterangepicker/daterangepicker.js"></script>
+    <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
     <!-- DataTables  & Plugins -->
     <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>

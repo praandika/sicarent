@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title','User')
+@section('title','Data User')
 
 @push('after-css')
 <script src="{{ asset('tanya.js') }}"></script>
@@ -18,22 +18,21 @@
                     Tambah
                 </button>
 
-                <!-- Form Delete All -->
-                <form action="{{ route('user.deleteall') }}" method="POST">
-                    @csrf
+                <div class="form-group">
+                  <label>Date and time:</label>
+                    <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
+                        <input type="text" class="form-control datetimepicker-input" data-target="#reservationdatetime"/>
+                        <div class="input-group-append" data-target="#reservationdatetime" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                    </div>
+                </div>
 
                     <div class="table-responsive">
                         <table id="datatb" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>
-                                        <div class="icheck-primary d-inline">
-                                            <input type="checkbox" id="checkAll">
-                                            <label for="checkAll">
-                                                #
-                                            </label>
-                                        </div>
-                                    </th>
+                                    <th>#</th>
                                     <th>Nama</th>
                                     <th>Email</th>
                                     <th>Username</th>
@@ -49,13 +48,7 @@
                                 @php($no = 1)
                                 @foreach($data as $o)
                                 <tr>
-                                    <td>
-                                        <div class="icheck-primary d-inline">
-                                            <input type="checkbox" id="checkData{{ $o->id }}" name="pilih[]" value=" $o->id  }}">
-                                            <label for="checkData{{ $o->id }}">
-                                                {{ $no++ }}
-                                            </label>
-                                    </td>
+                                    <td>{{ $no++ }}</td>
                                     <td> {{ $o->name }} </td>
                                     <td> {{ $o->email }} </td>
                                     <td> {{ $o->username }} </td>
@@ -89,12 +82,6 @@
                         </table>
                     </div>
 
-                    <button class="btn btn-danger" onclick="return tanya('Yakin hapus data ini?')">
-                        Hapus Terpilih
-                    </button>
-
-                </form>
-                <!-- END Form Delete All -->
             </div>
         </div>
     </div>
@@ -113,16 +100,6 @@
 
     $("#checkAll").click(function () {
         $('input:checkbox').not(this).prop('checked', this.checked);
-    });
-
-    //Date picker
-    $('#addbirthday').datetimepicker({
-        format: 'Y-m-d'
-    });
-
-    //Date picker
-    $('#editbirthday').datetimepicker({
-        format: 'Y-m-d'
     });
 
 </script>
