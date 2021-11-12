@@ -14,43 +14,37 @@
                 <div class="modal-body">
                     <!-- Name -->
                     <div class="form-group">
+                        <label for="name">Nama</label>
                         <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
-                            name="name" placeholder="Nama" value="{{ old('name') }}" required>
+                            name="name" placeholder="Masukkan nama..." value="{{ old('name') }}" required>
                     </div>
                     <!-- Email -->
                     <div class="form-group">
-                        <input type="email" class="form-control" name="email" placeholder="Email" value="{{ old('email') }}" required>
+                        <label for="email">Email</label>
+                        <input type="email" id="email" class="form-control" name="email" placeholder="Masukkan email..." value="{{ old('email') }}" required>
                     </div>
                     <!-- Username -->
                     <div class="form-group">
-                        <input type="text" class="form-control" name="username" placeholder="Username" value="{{ old('username') }}" required>
+                        <label for="username">Username</label>
+                        <input type="text" id="username" class="form-control" name="username" placeholder="Masukkan username..." value="{{ old('username') }}" required>
                     </div>
                     <!-- gender -->
                     <div class="form-group">
-                        <select class="form-control" name="gender" value="{{ old('gender') }}" required>
+                        <label for="gender">Gender</label>
+                        <select class="form-control" id="gender" name="gender" value="{{ old('gender') }}" required>
                             <option value="1">Laki-laki</option>
                             <option value="0">Perempuan</option>
                         </select>
                     </div>
-
                     <!-- Phone -->
                     <div class="form-group">
-                        <input type="text" class="form-control" name="phone" placeholder="Kontak (No. HP / Whatsapp)" value="{{ old('phone') }}" required>
+                        <label for="phone">Kontak</label>
+                        <input type="text" id="phone" class="form-control" name="phone" placeholder="Kontak (No. HP / Whatsapp)" value="{{ old('phone') }}" required>
                     </div>
-                    <!-- Address -->
-                    <div class="form-group">
-                        <textarea class="form-control" rows="3" placeholder="Alamat" name="address"
-                            placeholder="Alamat" value="{{ old('address') }}" required></textarea>
-                    </div>
-                    <!-- Birthday -->
-                    <div class="form-group" id="addbirthday" data-target-input="nearest">
-                        <input type="date" class="form-control datetimepicker-input"
-                            name="birthday" placeholder="Tanggal Lahir" value="{{ old('birthday') }}" required/>
-                    </div>
-
                     <!-- Access -->
                     <div class="form-group">
-                        <select class="form-control" name="access" value="{{ old('access') }}" required>
+                        <label for="access">Hak Akses</label>
+                        <select class="form-control" id="access" name="access" value="{{ old('access') }}" required>
                             <option value="user">User</option>
                             <option value="admin">Admin</option>
                             <option value="head">Pimpinan</option>
@@ -59,14 +53,16 @@
 
                     <!-- Password -->
                     <div class="form-group">
-                        <input type="password" class="form-control" id="password" placeholder="Enter password"
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Enter password..."
                             name="password" value="{{ old('password') }}" required>
                         <div class="invalid-feedback" id="feedback-password"></div>
                     </div>
 
                     <!-- Confirm -->
                     <div class="form-group">
-                        <input type="password" class="form-control" id="confirm" placeholder="Confirm password"
+                        <label for="confirm">Confirm Password</label>
+                        <input type="password" class="form-control" id="confirm" placeholder="Confirm password..."
                             name="confirm" required>
                         <div class="invalid-feedback" id="feedback-confirm"></div>
                     </div>
@@ -75,8 +71,6 @@
 
                 <div class="modal-footer">
                     <button type="reset" class="btn btn-secondary">Reset</button>
-                
-
             </form>
             <a class="btn btn-primary" onclick="store()" >Save Changes</a>
             </div>
@@ -87,12 +81,6 @@
 
 
 @push('after-script')
-<script>
-    //Date picker
-    $('#reservationdate').datetimepicker({
-        format: 'L'
-    });
-</script>
 <script>
     function store() {
         let $pass = document.getElementById('password').value;

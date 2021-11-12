@@ -16,6 +16,7 @@ class PaymentTableSeeder extends Seeder
         \App\Models\Payment::insert([
             [
                 'booking_id' => 1,
+                'invoice' => 'PBCR20210113105001',
                 'payment_date' => '2021-10-25',
                 'fines' => 0,
                 'total' => 200000,
@@ -25,6 +26,7 @@ class PaymentTableSeeder extends Seeder
             ],
             [
                 'booking_id' => 2,
+                'invoice' => 'PBCR20210213105001',
                 'payment_date' => '2021-10-26',
                 'fines' => 15000,
                 'total' => 215000,
@@ -34,6 +36,7 @@ class PaymentTableSeeder extends Seeder
             ],
             [
                 'booking_id' => 3,
+                'invoice' => 'PBCR20210313105001',
                 'payment_date' => '2021-10-27',
                 'fines' => 0,
                 'total' => 350000,

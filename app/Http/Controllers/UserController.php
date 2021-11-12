@@ -16,7 +16,7 @@ class UserController extends Controller
     
     public function index()
     {
-        $data = User::all();
+        $data = User::where('access','<>','user')->get();
         $title = "User";
         return view('admin.user', compact('data','title'));
     }
@@ -41,12 +41,10 @@ class UserController extends Controller
                 $data->username = $req->username;
                 $data->gender = $req->gender;
                 $data->phone = $req->phone;
-                $data->address = $req->address;
                 $data->access = $req->access;
-                $data->birthday = $req->birthday;
                 $data->password = bcrypt($pass);
                 $data->save();
-                toast('Data berhasil disimpan','success')->autoClose(5000);
+                toast('Data berhasil disimpan','success')->autoClose(1500);
                 return redirect()->back();
     
             }else{
@@ -54,5 +52,18 @@ class UserController extends Controller
                 return redirect()->back()->withInput();
             }
         }
+    }
+
+    public function update(Request $req){
+        $data = User::find($req->id);
+        $data->name = $req->name;
+        $data->email = $req->email;
+        $data->username = $req->username;
+        $data->username = $req->gender;
+        $data->phone = $req->phone;
+        $data->access = $req->access;
+        $data->save();
+        toast('Data berhasil disimpan','success')->autoClose(1500);
+        return redirect()->route('user.read');
     }
 }

@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder
                 'email_verified_at' => Carbon::now('GMT+8'),
                 'password' => bcrypt('12345678'),
                 'access' => 'admin',
+                'phone' => '081246571421',
+                'gender' => 1
             ],
             [
                 'name' => 'Pemimpin',
@@ -34,6 +36,18 @@ class DatabaseSeeder extends Seeder
                 'email_verified_at' => Carbon::now('GMT+8'),
                 'password' => bcrypt('12345678'),
                 'access' => 'head',
+                'phone' => '081258452452',
+                'gender' => 1
+            ],
+            [
+                'name' => 'Administrator',
+                'username' => 'admin',
+                'email' => 'admin@gmail.com',
+                'email_verified_at' => Carbon::now('GMT+8'),
+                'password' => bcrypt('12345678'),
+                'access' => 'admin',
+                'phone' => '082154658967',
+                'gender' => 1
             ],
             
         ]);

@@ -15,8 +15,9 @@ class CreateBookingsTable extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id');
-            $table->string('car_id');
+            $table->string('book_code');
+            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('car_id');
             $table->date('booking_date');
             $table->date('return_date');
             $table->enum('booking_status',['unpaid','paid']);

@@ -5,6 +5,7 @@
         <div class="modal-content">
 
             <form action="{{ route('user.update') }}" method="POST">
+            @csrf
             <div class="modal-header">
                 <h5 class="modal-title" id="edit{{ $o->id }}Label">Edit {{ $title }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -12,79 +13,50 @@
                 </button>
             </div>
             <div class="modal-body">
+                <input type="hidden" name="id" value="{{ $o->id }}">
                 <!-- Name -->
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" value="{{ $o->name }}" name="name">
-                    <div class="input-group-append">
-                        <span class="input-group-text"><i class="fas fa-check"></i></span>
-                    </div>
+                <div class="form-group">
+                    <label for="name">Nama</label>
+                    <input type="text" id="name" class="form-control" value="{{ $o->name }}" placeholder="Masukkan name..." name="name">
                 </div>
                 <!-- Email -->
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" value="{{ $o->email }}" name="email">
-                    <div class="input-group-append">
-                        <span class="input-group-text"><i class="fas fa-check"></i></span>
-                    </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" id="email" class="form-control" value="{{ $o->email }}" placeholder="Masukkan email..." name="email">
                 </div>
                 <!-- Username -->
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" value="{{ $o->username }}" name="username">
-                    <div class="input-group-append">
-                        <span class="input-group-text"><i class="fas fa-check"></i></span>
-                    </div>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" class="form-control" value="{{ $o->username }}" placeholder="Masukkan username..." name="username">
                 </div>
                 <!-- gender -->
                 <div class="form-group">
-                    <select class="form-control" value="{{ $o->gender == '1' ? 'Laki-laki' : 'Perempuan' }}" name="gender">
-                        @if($o->gender == '1')
+                    <label for="gender">Gender</label>
+                    <select class="form-control" id="gender" value="{{ $o->gender == '1' ? 'Laki-laki' : 'Perempuan' }}" placeholder="Pilih gender..." name="gender">
                         <option value="0">Perempuan</option>
-                        @else
                         <option value="1">Laki-laki</option>
-                        @endif
                     </select>
                 </div>
 
                 <!-- Phone -->
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" value="{{ $o->phone }}" name="phone">
-                    <div class="input-group-append">
-                        <span class="input-group-text"><i class="fas fa-check"></i></span>
-                    </div>
-                </div>
-                <!-- Address -->
                 <div class="form-group">
-                    <textarea class="form-control" rows="3" placeholder="Alamat" name="address">
-                        {{ $o->address }}
-                    </textarea>
+                    <label for="phone">Kontak</label>
+                    <input type="text" id="phone" class="form-control" value="{{ $o->phone }}" placeholder="Kontak (WA / No. Telp)" name="phone">
                 </div>
-                <!-- Birthday -->
-                <div class="input-group date mb-3" id="editbirthday" data-target-input="nearest">
-                    <input type="text" class="form-control datetimepicker-input" data-target="#editbirthday" name="birthday" placeholder="Tanggal Lahir" />
-                    <div class="input-group-append" data-target="#editbirthday" data-toggle="datetimepicker">
-                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                    </div>
-                </div>
-
                 <!-- Access -->
                 <div class="form-group">
-                    <select class="form-control" value="{{ $o->access }}" name="access">
-                        @if($o->access == 'admin')
+                    <label for="access">Hak Akses</label>
+                    <select class="form-control" id="access" value="{{ $o->access }}" placeholder="Pilih hak akses..." name="access">
                         <option value="user">User</option>
                         <option value="head">Pimpinan</option>
-                        @elseif($o->access == 'user')
                         <option value="user">Admin</option>
-                        <option value="head">Pimpinan</option>
-                        @else
-                        <option value="user">Admin</option>
-                        <option value="head">User</option>
-                        @endif
                     </select>
                 </div>
 
             </div>
             <div class="modal-footer">
                 <button type="reset" class="btn btn-secondary">Reset</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
             </div>
 
             </form>

@@ -17,6 +17,7 @@ class BookingTableSeeder extends Seeder
             [
                 'user_id' => 1,
                 'car_id' => 1,
+                'book_code' => 'PBCR20210113105001',
                 'booking_date' => '2021-10-25',
                 'return_date' => '2021-10-26',
                 'booking_status' => 'paid',
@@ -25,6 +26,7 @@ class BookingTableSeeder extends Seeder
             [
                 'user_id' => 2,
                 'car_id' => 1,
+                'book_code' => 'PBCR20210213105001',
                 'booking_date' => '2021-10-26',
                 'return_date' => '2021-10-28',
                 'booking_status' => 'paid',
@@ -33,6 +35,7 @@ class BookingTableSeeder extends Seeder
             [
                 'user_id' => 3,
                 'car_id' => 4,
+                'book_code' => 'PBCR20210313105001',
                 'booking_date' => '2021-10-27',
                 'return_date' => '2021-10-28',
                 'booking_status' => 'paid',
@@ -41,6 +44,7 @@ class BookingTableSeeder extends Seeder
             [
                 'user_id' => 4,
                 'car_id' => 2,
+                'book_code' => 'PBCR20210413105001',
                 'booking_date' => '2021-10-27',
                 'return_date' => '2021-10-28',
                 'booking_status' => 'unpaid',
