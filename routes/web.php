@@ -33,7 +33,7 @@ Route::get('auth/google/callback', [App\Http\Controllers\OAuthController::class,
 Route::prefix('user')->group(function(){
     // Read
     Route::get('/', [App\Http\Controllers\UserController::class, 'index'])->name('user.read');
-    // Create
+    // Store
     Route::post('/store', [App\Http\Controllers\UserController::class, 'store'])->name('user.store');
     /**Edit */
     Route::get('/edit/{id}', [App\Http\Controllers\UserController::class, 'edit'])->name('user.edit');
@@ -43,3 +43,20 @@ Route::prefix('user')->group(function(){
     Route::post('adminpass', [App\Http\Controllers\UserController::class, 'adminpass'])->name('admin.password');
 });
 /** END Manage Data User */
+
+// Data Mobil
+Route::prefix('car')->group(function(){
+    // Read
+    Route::get('/', [App\Http\Controllers\CarController::class, 'index'])->name('car.read');
+    // Create
+    Route::get('/create', [App\Http\Controllers\CarController::class, 'create'])->name('car.create');
+    // Store
+    Route::post('/store', [App\Http\Controllers\CarController::class, 'store'])->name('car.store');
+    /**Edit */
+    Route::get('/edit/{id}', [App\Http\Controllers\CarController::class, 'edit'])->name('car.edit');
+    // Update
+    Route::post('/update', [App\Http\Controllers\CarController::class, 'update'])->name('car.update');
+    // Delete
+    Route::post('/delete', [App\Http\Controllers\CarController::class, 'delete'])->name('car.delete.all');
+});
+// END Data Mobil

@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="createModal">
+<div class="modal fade" id="createUser">
     <div class="modal-dialog">
         <div class="modal-content">
 
@@ -15,7 +15,7 @@
                     <!-- Name -->
                     <div class="form-group">
                         <label for="name">Nama</label>
-                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
+                        <input type="text" class="form-control" id="name"
                             name="name" placeholder="Masukkan nama..." value="{{ old('name') }}" required>
                     </div>
                     <!-- Email -->

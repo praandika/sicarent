@@ -26,7 +26,7 @@ class CreateCarsTable extends Migration
             $table->string('car_year');
             $table->text('image');
             $table->string('fuel');
-            $table->string('car_status');
+            $table->enum('car_status',['available','rented','maintenance']);
             $table->timestamps();
         });
     }

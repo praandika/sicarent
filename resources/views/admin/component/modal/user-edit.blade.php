@@ -1,6 +1,6 @@
 <!-- Modal -->
 @foreach($data as $o)
-<div class="modal fade" id="editModal{{ $o->id }}">
+<div class="modal fade" id="editUser{{ $o->id }}">
     <div class="modal-dialog">
         <div class="modal-content">
 
@@ -32,9 +32,14 @@
                 <!-- gender -->
                 <div class="form-group">
                     <label for="gender">Gender</label>
-                    <select class="form-control" id="gender" value="{{ $o->gender == '1' ? 'Laki-laki' : 'Perempuan' }}" placeholder="Pilih gender..." name="gender">
+                    <select class="form-control" id="gender" placeholder="Pilih gender..." name="gender">
+                        @if($o->gender == 1)
+                        <option value="1">Laki-laki</option>
+                        <option value="0">Perempuan</option>
+                        @else
                         <option value="0">Perempuan</option>
                         <option value="1">Laki-laki</option>
+                        @endif
                     </select>
                 </div>
 
@@ -46,10 +51,20 @@
                 <!-- Access -->
                 <div class="form-group">
                     <label for="access">Hak Akses</label>
-                    <select class="form-control" id="access" value="{{ $o->access }}" placeholder="Pilih hak akses..." name="access">
-                        <option value="user">User</option>
+                    <select class="form-control" id="access" placeholder="Pilih hak akses..." name="access">
+                        @if($o->access == "admin")
+                        <option value="{{ $o->access }}">{{ ucwords($o->access) }}</option>
                         <option value="head">Pimpinan</option>
-                        <option value="user">Admin</option>
+                        <option value="user">User</option>
+                        @elseif($o->access == "head")
+                        <option value="{{ $o->access }}">{{ ucwords($o->access) }}</option>
+                        <option value="admin">Admin</option>
+                        <option value="user">User</option>
+                        @else
+                        <option value="{{ $o->access }}">{{ ucwords($o->access) }}</option>
+                        <option value="admin">Admin</option>
+                        <option value="head">Pemimpin</option>
+                        @endif
                     </select>
                 </div>
 

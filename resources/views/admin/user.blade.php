@@ -10,24 +10,13 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Data User</h3>
+                <h3 class="card-title">Tabel User</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#createModal">
+                <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#createUser">
                     Tambah
                 </button>
-
-                <div class="form-group">
-                  <label>Date and time:</label>
-                    <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
-                        <input type="text" class="form-control datetimepicker-input" data-target="#reservationdatetime"/>
-                        <div class="input-group-append" data-target="#reservationdatetime" data-toggle="datetimepicker">
-                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                        </div>
-                    </div>
-                </div>
-
                     <div class="table-responsive">
                         <table id="datatb" class="table table-bordered table-striped">
                             <thead>
@@ -58,7 +47,7 @@
                                     <td> {{ $o->birthday }} </td>
                                     <td> {{ $o->access }} </td>
                                     <td>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal{{ $o->id }}">
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editUser{{ $o->id }}">
                                             Edit
                                         </button>
                                         </th>
@@ -87,8 +76,8 @@
     </div>
 </div>
 
-@include('admin.component.modal.modal-edit')
-@include('admin.component.modal.modal-create')
+@include('admin.component.modal.user-edit')
+@include('admin.component.modal.user-create')
 
 @endsection
 
