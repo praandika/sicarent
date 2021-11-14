@@ -4,30 +4,25 @@
             <div class="col-md-12	featured-top">
                 <div class="row no-gutters">
                     <div class="col-md-4 d-flex align-items-center">
-                        <form action="#" class="request-form ftco-animate bg-primary">
-                            <h2>Make your trip</h2>
+                        <form action="{{ route('booking') }}" method="get" class="request-form ftco-animate bg-primary">
+                            @csrf
+                            <h2>Booking form</h2>
                             <div class="form-group">
-                                <label for="" class="label">Pick-up location</label>
-                                <input type="text" class="form-control" placeholder="City, Airport, Station, etc">
-                            </div>
-                            <div class="form-group">
-                                <label for="" class="label">Drop-off location</label>
-                                <input type="text" class="form-control" placeholder="City, Airport, Station, etc">
-                            </div>
-                            <div class="d-flex">
-                                <div class="form-group mr-2">
-                                    <label for="" class="label">Pick-up date</label>
-                                    <input type="text" class="form-control" id="book_pick_date" placeholder="Date">
-                                </div>
-                                <div class="form-group ml-2">
-                                    <label for="" class="label">Drop-off date</label>
-                                    <input type="text" class="form-control" id="book_off_date" placeholder="Date">
-                                </div>
+                                <label for="transmition" class="label">Transmition</label>
+                                <select name="transmition" id="transmition" class="form-control">
+                                    <option value="AT" style="color: black;">Automatic</option>
+                                    <option value="MT" style="color: black;">Manual</option>
+                                </select>
                             </div>
                             <div class="form-group">
-                                <label for="" class="label">Pick-up time</label>
-                                <input type="text" class="form-control" id="time_pick" placeholder="Time">
+                                <label for="capacity" class="label">Capacity</label>
+                                <select name="capacity" id="capacity" class="form-control">
+                                @foreach($data as $o)
+                                    <option value="{{ $o->car_capacity }}" style="color: black;">{{ $o->car_capacity }} Seats</option>
+                                @endforeach
+                                </select>
                             </div>
+                        
                             <div class="form-group">
                                 <input type="submit" value="Rent A Car Now" class="btn btn-secondary py-3 px-4">
                             </div>
@@ -40,9 +35,9 @@
                                 <div class="col-md-4 d-flex align-self-stretch ftco-animate">
                                     <div class="services w-100 text-center">
                                         <div class="icon d-flex align-items-center justify-content-center"><span
-                                                class="flaticon-route"></span></div>
+                                                class="flaticon-car"></span></div>
                                         <div class="text w-100">
-                                            <h3 class="heading mb-2">Choose Your Pickup Location</h3>
+                                            <h3 class="heading mb-2">Choose Your Car</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -65,7 +60,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <p><a href="#" class="btn btn-primary py-3 px-4">Reserve Your Perfect Car</a></p>
+                            <p><a href="#carlist" class="btn btn-primary py-3 px-4">Look Up Your Favorite Car</a></p>
                         </div>
                     </div>
                 </div>

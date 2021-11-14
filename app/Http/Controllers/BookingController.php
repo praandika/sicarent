@@ -3,84 +3,46 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Models\Car;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class BookingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+    public function booking(Request $req){
+        // Get form value dari home page
+        $bookDate = $req->bookdate;
+        $returnDate = $req->returndate;
+        $capacity = $req->capacity;
+        $transmition = $req->transmition;
+        $token = $req->_token;
+
+        $data = Car::where([
+                ['transmition', $transmition],
+                ['car_capacity', $capacity],
+            ]
+        )->get();
+        
+        return view('search', compact('bookDate','returnDate','capacity','transmition','data','token'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function detail($token, $id, $singePrice){
+        // Get Car data
+        $data = Car::where('id',$id)->get();
+        $month = Carbon::now('GMT+8')->format('M');
+        
+        // // Hitung harga
+        // $start = Carbon::parse($bookDate)->format('Ymd');
+        // $end = Carbon::parse($returnDate)->format('Ymd');
+        // $days = $end - $start;
+        // $total = $singePrice*$days;
+
+        return view('detail', compact('data','id','month'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Booking  $booking
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Booking $booking)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Booking  $booking
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Booking $booking)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Booking  $booking
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Booking $booking)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Booking  $booking
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Booking $booking)
-    {
-        //
+    public function setbook(Request $req){
+        $data = Car::where('id',$req->id)->get();
+        return view('setbook', compact('data'));
     }
 }

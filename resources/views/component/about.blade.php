@@ -1,4 +1,4 @@
-<section class="ftco-section ftco-about">
+<section class="ftco-section ftco-about" id="about">
     <div class="container">
         <div class="row no-gutters">
             <div class="col-md-6 p-md-5 img img-2 d-flex justify-content-center align-items-center"

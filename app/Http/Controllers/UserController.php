@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Hash;
 use Auth;
 
 class UserController extends Controller
@@ -65,5 +66,25 @@ class UserController extends Controller
         $data->save();
         toast('Data berhasil disimpan','success')->autoClose(1500);
         return redirect()->route('user.read');
+    }
+
+    public function adminpass(Request $req){
+        $old = $req->oldpass;
+        $new = $req->adminpass;
+        $id = Auth::user()->id;
+
+        $data = User::find($id);
+
+        if (Hash::check($old, $data->password)) {
+            $data->password = bcrypt($new);
+            $data->save();
+            toast('Password changed','success');
+            Auth::logout();
+            return redirect()->route('login');
+        } else {
+            alert()->warning('Warning','Password salah!');
+            return redirect()->back()->withInput();
+        }
+        
     }
 }

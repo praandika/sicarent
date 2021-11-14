@@ -24,8 +24,12 @@
                             <thead>
                                 <tr>
                                     <th>
-                                        <input type="checkbox" id="checkAll">
-                                        <label for="checkAll">#</label>
+                                        <div class="icheck-danger d-inline">
+                                            <input type="checkbox" id="checkAll">
+                                            <label for="checkAll">#
+                                            </label>
+                                        </div>
+
                                     </th>
                                     <th>Status</th>
                                     <th>Mobil</th>
@@ -46,8 +50,11 @@
                                 @forelse($data as $o)
                                 <tr>
                                     <td>
-                                        <input type="checkbox" name="pilih[]" id="checkData" value="{{ $o->id }}">
-                                        {{ $no++ }}
+                                        <div class="icheck-danger d-inline">
+                                            <input type="checkbox" name="pilih[]" id="checkData{{ $o->id }}" value="{{ $o->id  }}">
+                                            <label for="checkData{{ $o->id }}">{{ $no++  }}
+                                            </label>
+                                        </div>
                                     </td>
                                     <td> {{ $o->car_status }} </td>
                                     <td> {{ $o->car_name }} </td>
@@ -57,18 +64,15 @@
                                     <td> {{ $o->engine_vol }} </td>
                                     <td> {{ $o->car_capacity }} </td>
                                     <td> {{ $o->fuel }} </td>
-                                    <td> {{ $o->price }} </td>
+                                    <td> Rp {{ number_format($o->price, 0, ',', '.') }} </td>
                                     <td> {{ $o->plate_number }} </td>
                                     <td> {{ $o->car_year }} </td>
                                     <td>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal"
-                                            data-target="#editMobil{{ $o->id }}">
-                                            <i class="fas fa-pencil-alt"></i>
-                                        </button>
+                                        <a href="{{ route('car.edit',$o->id) }}" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></a>
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td colspan="10" class="text-center">no data available</td>
+                                    <td colspan="13" class="text-center">no data available</td>
                                 </tr>
                                 @endforelse
                             </tbody>
@@ -86,6 +90,7 @@
                                     <th>Harga</th>
                                     <th>Nopol</th>
                                     <th>Tahun</th>
+                                    <th>Action</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -118,5 +123,6 @@
     $("#checkAll").click(function () {
         $('input:checkbox').not(this).prop('checked', this.checked);
     });
+
 </script>
 @endpush

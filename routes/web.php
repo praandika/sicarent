@@ -14,7 +14,16 @@ use Illuminate\Support\Facades\Route;
 */
 /** Landing Page*/
 Route::get('/', [App\Http\Controllers\LandingController::class, 'index'])->name('landing.page');
+Route::get('/carlist', [App\Http\Controllers\LandingController::class, 'carList'])->name('car.list');
 /** END Landing Page */
+
+// Booking
+Route::get('booking', [App\Http\Controllers\BookingController::class, 'booking'])->name('booking');
+Route::get('detail/{token}/{id}/{price}', [App\Http\Controllers\BookingController::class, 'detail'])->name('detail');
+Route::post('savebook', [App\Http\Controllers\BookingController::class, 'savebook'])->name('savebook');
+
+Route::get('setbook', [App\Http\Controllers\BookingController::class, 'setbook'])->name('setbook');
+// END Booking
 
 /**Auth Route */
 Auth::routes();
