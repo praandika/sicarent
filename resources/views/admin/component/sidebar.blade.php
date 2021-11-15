@@ -40,7 +40,7 @@
 
                 @if((Auth::user()->access == "admin") || (Auth::user()->access == "head") || (Auth::user()->access == "user"))
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('dashboard') }}" class="nav-link">
                         <i class="nav-icon far fa-chart-bar"></i>
                         <p>
                             Dashboard
@@ -67,7 +67,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('return') }}" class="nav-link">
                         <i class="nav-icon fas fa-undo-alt"></i>
                         <p>
                             Pengembalian
@@ -76,9 +76,9 @@
                 </li>
                 @endif
 
-                @if((Auth::user()->access == "admin") || (Auth::user()->access == "user"))
+                @if(Auth::user()->access == "admin")
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('book.history') }}" class="nav-link">
                         <i class="nav-icon fas fa-book"></i>
                         <p>
                             Data Booking
@@ -89,7 +89,7 @@
 
                 @if(Auth::user()->access == "admin")
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('pay.history') }}" class="nav-link">
                         <i class="nav-icon fas fa-money-bill-wave"></i>
                         <p>
                             Data Transaksi
@@ -97,7 +97,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('calendar') }}" class="nav-link">
                         <i class="nav-icon fas fa-calendar-week"></i>
                         <p>
                             Kalender
@@ -130,10 +130,18 @@
 
                 @if(Auth::user()->access == "user")
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('book.history') }}" class="nav-link">
                         <i class="nav-icon fas fa-file-invoice"></i>
                         <p>
-                            Invoice
+                            Booking History
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('pay.history') }}" class="nav-link">
+                        <i class="nav-icon fas fa-file-invoice"></i>
+                        <p>
+                            Payment History
                         </p>
                     </a>
                 </li>

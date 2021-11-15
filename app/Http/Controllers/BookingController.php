@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\Payment;
+use App\Models\User;
 use App\Models\Car;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -40,18 +41,23 @@ class BookingController extends Controller
         $calendar = Booking::where('car_id',$id)
         ->get();
         $month = Carbon::now('GMT+8')->format('M');
-        
-        // // Hitung harga
-        // $start = Carbon::parse($bookDate)->format('Ymd');
-        // $end = Carbon::parse($returnDate)->format('Ymd');
-        // $days = $end - $start;
-        // $total = $singePrice*$days;
+
+        return view('detail', compact('data','id','month','calendar'));
+    }
+
+    public function setbook($id, $singlePrice){
+        // Get Car data
+        $data = Car::where('id',$id)->get();
+        $calendar = Booking::where('car_id',$id)
+        ->get();
+        $month = Carbon::now('GMT+8')->format('M');
 
         return view('detail', compact('data','id','month','calendar'));
     }
 
     public function savebook(Request $req){
         $now = Carbon::now('GMT+8')->format('YmdHis');
+        $dateNow = Carbon::now('GMT+8')->format('Y-m-d');
         $bookCode = 'PBCR'.$now;
         // Cek booking date
         $start = Booking::where([
@@ -71,6 +77,13 @@ class BookingController extends Controller
                 alert()->warning('Warning','Booking date is full, please choose another date');
                 return redirect()->back()->withInput();
             } else {
+                User::where('id', Auth::user()->id)->update([
+                    'phone' => $req->phone,
+                    'address' => $req->address,
+                    'residence_idcard' => $req-> idcard,
+                    'account_number' => $req->account_number
+                ]);
+                
                 $book = new Booking;
                 $book->book_code = $bookCode;
                 $book->user_id = Auth::user()->id;
@@ -78,15 +91,43 @@ class BookingController extends Controller
                 $book->booking_date = $req->start;
                 $book->return_date = $req->end;
                 $book->save();
+                
+                $bookId = Booking::where('book_code',$bookCode)->pluck('id');
 
-                toast('Data berhasil disimpan','success')->autoClose(1500);
-                return redirect()->route('confirm');
+                $pay = new Payment;
+                $pay->invoice = $bookCode;
+                $pay->booking_id = $bookId[0];
+                $pay->payment_date = $dateNow;
+                $pay->fines = 0;
+                $pay->total = $req->grandtotal;
+                $pay->changes = 0;
+                $pay->overtime = 0;
+                $pay->save();
+
+                alert()->success('Welcome',Auth::user()->name.' please confirm your payment to get invoice');
+                return redirect()->route('dashboard');
             }
         }
     }
 
-    public function setbook(Request $req){
-        $data = Car::where('id',$req->id)->get();
-        return view('setbook', compact('data'));
+    public function hisBook(){
+        if(Auth::user()->access == "user"){
+            $data = Booking::join('users','bookings.user_id','=','users.id')
+            ->join('cars','bookings.car_id','=','cars.id')
+            ->where('user_id',Auth::user()->id)
+            ->get();
+            return view('admin.historybook', compact('data'));
+        }else{
+            $data = Booking::join('users','bookings.user_id','=','users.id')
+            ->join('cars','bookings.car_id','=','cars.id')
+            ->get();
+            return view('admin.historybook', compact('data'));
+        }
+    }
+
+    public function return(){
+        $data = Payment::join('bookings','payments.booking_id','=','bookings.id')
+        ->get();
+        return view('admin.return', compact('data'));
     }
 }

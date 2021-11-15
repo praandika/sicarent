@@ -20,7 +20,7 @@ class CreateBookingsTable extends Migration
             $table->unsignedInteger('car_id');
             $table->date('booking_date');
             $table->date('return_date');
-            $table->enum('booking_status',['unpaid','paid']);
+            $table->enum('booking_status',['invalid','valid']);
             $table->timestamps();
         });
     }

@@ -14,7 +14,14 @@ class LandingController extends Controller
         return view('landing', compact('data','car'));
     }
 
-    public function car(){
-        // 
+    public function look($id){
+        $data = Car::where('id',$id)->get();
+        $car = Car::all();
+        return view('look', compact('data','car'));
+    }
+
+    public function carList(){
+        $data = Car::all();
+        return view('carlist', compact('data'));
     }
 }

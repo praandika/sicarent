@@ -1,9 +1,18 @@
 @extends('layouts.landing-app')
 @section('landing-content')
-@push('after-css')
+@push('before-css')
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+@endpush
+
+@push('after-css')
+<style>
+    .fc-title {
+        color: #fff !important;
+    }
+
+</style>
 @endpush
 @include('component.navigation')
 <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('{{ asset("images/bg_1.jpg") }}');"
@@ -14,9 +23,6 @@
             <div class="col-md-9 ftco-animate pb-5">
                 <p class="breadcrumbs">
                     <span class="mr-2"><a href="{{ route('landing.page') }}">Home <i
-                                class="ion-ios-arrow-forward"></i></a></span>
-
-                    <span class="mr-2"><a href="{{ url()->previous() }}">Choose <i
                                 class="ion-ios-arrow-forward"></i></a></span>
                     <span>Booking <i class="ion-ios-arrow-forward"></i></span>
                 </p>
@@ -76,9 +82,31 @@
                                     <td>Fuel</td>
                                     <td>: {{ $o->fuel }}</td>
                                 </tr>
-                                <tr style="color: royalblue !important;">
-                                    <td><h3>Price</h3></td>
-                                    <td><strong><h3 style="color: royalblue !important;">: Rp {{ number_format($o->price, 0, ',', '.') }} / Day(s)</h3></strong></td>
+                                <tr>
+                                    <td>
+                                        <h5>Price</h5>
+                                    </td>
+                                    <td><strong>
+                                            <h5>: Rp {{ number_format($o->price, 0, ',', '.') }} / Day(s)</h5>
+                                        </strong></td>
+                                    <input type="hidden" id="price" name="price" value="{{ $o->price }}">
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h5>Duration</h5>
+                                    </td>
+                                    <td>
+                                        <h5>: <span id="duration"></span> day(s)</h5>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h3>Total</h3>
+                                    </td>
+                                    <td>
+                                        <h3 style="color: royalblue !important;">: <span id="total"></span></h3>
+                                    </td>
+                                    <input type="hidden" name="grandtotal" id="inputTotal">
                                 </tr>
                             </table>
                         </div>
@@ -93,16 +121,41 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-6"></div>
+                        <div class="col-lg-6" style="box-shadow: -20px -3px 21px -9px rgba(212,212,212,0.75); padding: 10px;">
+                            <div class="row">
+                                <div class="form-group">
+                                    <label for="" class="label">Phone</label>
+                                    <input type="text" class="form-control" name="phone"
+                                        placeholder="Enter your contact (Whatsapp)" value="{{ old('phone') }}" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="" class="label">ID Card (KTP/Passpor)</label>
+                                    <input type="text" class="form-control" name="idcard"
+                                        placeholder="Enter your ID Card Number" value="{{ old('idcard') }}" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="" class="label">Account Number</label>
+                                    <input type="number" class="form-control" name="account_number"
+                                        placeholder="Enter your Account Number" value="{{ old('account_number') }}" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="" class="label">Address</label>
+                                    <input type="text" class="form-control" name="address"
+                                        placeholder="Enter your Address" value="{{ old('address') }}" required>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-lg-6"
                             style="box-shadow: -20px -3px 21px -9px rgba(212,212,212,0.75); padding: 10px;">
                             <div class="row">
-
                                 <div class="col-lg-6">
                                     <div class="form-group mr-2">
                                         <label for="" class="label"><strong>Select your booking date</strong></label>
                                         <input type="text" class="form-control" id="book_pick_date" name="start"
-                                            placeholder="yyyy-mm-dd" value="{{ old('start') }}">
+                                            placeholder="yyyy-mm-dd" value="{{ old('start') }}" required>
                                     </div>
                                 </div>
 
@@ -110,7 +163,7 @@
                                     <div class="form-group ml-2">
                                         <label for="" class="label"><strong>Select your return date</strong></label>
                                         <input type="text" class="form-control" id="book_off_date" name="end"
-                                            placeholder="yyyy-mm-dd" value="{{ old('end') }}">
+                                            placeholder="yyyy-mm-dd" value="{{ old('end') }}" required>
                                     </div>
                                 </div>
                             </div>
@@ -135,6 +188,27 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script>
+    $(document).ready(function () {
+        let price = $('#price').val();
+        $('body').on('change', '#book_off_date', function () {
+            let x = $('#book_pick_date').val();
+            let y = $('#book_off_date').val();
+            let price = $('#price').val();
+            let start = moment(x).format('YYYYMD');
+            let end = moment(y).format('YYYYMD');
+            let duration = end - start;
+            let total = price * duration;
+            $('#duration').text(duration);
+            $('#total').text(new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR'
+            }).format(total));
+            $('#inputTotal').val(total);
+        });
+    });
+
+</script>
 <script>
     $(document).ready(function () {
         // page is now ready, initialize the calendar...

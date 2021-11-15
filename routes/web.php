@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 /** Landing Page*/
 Route::get('/', [App\Http\Controllers\LandingController::class, 'index'])->name('landing.page');
 Route::get('/carlist', [App\Http\Controllers\LandingController::class, 'carList'])->name('car.list');
+Route::get('/look/{id}', [App\Http\Controllers\LandingController::class, 'look'])->name('look');
 /** END Landing Page */
 
 // Booking
@@ -22,8 +23,13 @@ Route::get('booking', [App\Http\Controllers\BookingController::class, 'booking']
 Route::get('detail/{token}/{id}/{price}', [App\Http\Controllers\BookingController::class, 'detail'])->name('detail');
 Route::post('savebook', [App\Http\Controllers\BookingController::class, 'savebook'])->name('savebook');
 
-Route::get('setbook', [App\Http\Controllers\BookingController::class, 'setbook'])->name('setbook');
+Route::get('detail/2/{id}/{price}', [App\Http\Controllers\BookingController::class, 'setbook'])->name('setbook');
 // END Booking
+
+// Payment
+Route::get('confirm/{id}', [App\Http\Controllers\PaymentController::class, 'confirm'])->name('confirm');
+Route::post('paymentedit', [App\Http\Controllers\PaymentController::class, 'paymentEdit'])->name('payment.edit');
+// END Payment
 
 /**Auth Route */
 Auth::routes();
@@ -69,3 +75,24 @@ Route::prefix('car')->group(function(){
     Route::post('/delete', [App\Http\Controllers\CarController::class, 'delete'])->name('car.delete.all');
 });
 // END Data Mobil
+
+// Invoice
+Route::get('invoice/{invoice}', [App\Http\Controllers\PaymentController::class, 'invoice']);
+
+Route::get('print/{invoice}', [App\Http\Controllers\PaymentController::class, 'printInvoice'])->name('print.invoice');
+// END Invoice
+
+// History
+Route::get('payment/history', [App\Http\Controllers\PaymentController::class, 'hisPay'])->name('pay.history');
+
+Route::get('book/history', [App\Http\Controllers\BookingController::class, 'hisBook'])->name('book.history');
+// END History
+
+// Calendar
+Route::get('calendar', [App\Http\Controllers\HomeController::class, 'calendar'])->name('calendar');
+// END Calendar
+
+// Return
+Route::get('return', [App\Http\Controllers\BookingController::class, 'return'])->name('return');
+Route::get('return/process', [App\Http\Controllers\BookingController::class, 'returnProcess'])->name('return.process');
+// END Return

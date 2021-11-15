@@ -1,4 +1,4 @@
-<section class="ftco-section ftco-no-pt bg-light">
+<section class="ftco-section ftco-no-pt bg-light" id="search">
     <div class="container">
         <div class="row no-gutters">
             <div class="col-md-12	featured-top">

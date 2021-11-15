@@ -59,6 +59,7 @@
     </script>
     <script src="{{ asset('js/google-map.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
+    <script src="{{ asset('js/moment.js') }}"></script>
     @stack('after-script')
 
 </body>

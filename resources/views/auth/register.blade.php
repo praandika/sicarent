@@ -84,7 +84,7 @@
 
       <div class="social-auth-links text-center">
         <a href="{{ route('google.login') }}" class="btn btn-block btn-danger">
-          <i class="fab fa-google-plus mr-2"></i>
+          <i class="fab fa-google"></i>
           Sign up using Google+
         </a>
       </div>

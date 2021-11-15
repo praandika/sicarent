@@ -315,7 +315,7 @@
 
 
 	$('#book_pick_date,#book_off_date').datepicker({
-	  'format': 'd-m-yyyy',
+	  'format': 'yyyy-m-d',
 	  'autoclose': true,
 	  startDate: new Date()
 	});
