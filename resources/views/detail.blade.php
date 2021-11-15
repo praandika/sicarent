@@ -1,6 +1,10 @@
 @extends('layouts.landing-app')
 @section('landing-content')
-
+@push('after-css')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+@endpush
 @include('component.navigation')
 <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('{{ asset("images/bg_1.jpg") }}');"
     data-stellar-background-ratio="0.5">
@@ -35,7 +39,8 @@
                             <input type="hidden" name="id" value="{{ $id }}">
                             <input type="hidden" value="{{ $o->car_capacity }}" name="capacity">
                             <input type="hidden" value="{{ $o->transmition }}" name="transmition">
-                            <img src="{{ asset('images/car/'.$o->image) }}" style="width: 500px;" class="mb-3">
+                            <img src="{{ asset('images/car/'.$o->image) }}" style="width: 500px;"
+                                class="img-fluid mb-3">
 
                         </div>
                         <div class="col-lg-6">
@@ -71,241 +76,81 @@
                                     <td>Fuel</td>
                                     <td>: {{ $o->fuel }}</td>
                                 </tr>
+                                <tr style="color: royalblue !important;">
+                                    <td><h3>Price</h3></td>
+                                    <td><strong><h3 style="color: royalblue !important;">: Rp {{ number_format($o->price, 0, ',', '.') }} / Day(s)</h3></strong></td>
+                                </tr>
                             </table>
                         </div>
                     </div>
                     @endforeach
-                    <hr>
                     <div class="row">
-                        <div class="col-lg-12 text-center">
-                            <h3><strong>Pick your date</strong></h3>
-                        </div>
-
-                        <div class="card text-white bg-info mb-3 mr-3" style="max-width: 18rem;">
-                            <div class="card-body">
-                                <p class="card-text">{{ $month }}</p>
-                                <h4 class="text-white"><strong>01</strong></h4>
-                            </div>
-                        </div>
-
-                        <div class="card text-white bg-info mb-3 mr-3" style="max-width: 18rem;">
-                            <div class="card-body">
-                                <p class="card-text">{{ $month }}</p>
-                                <h4 class="text-white"><strong>01</strong></h4>
-                            </div>
-                        </div>
-
-                        <div class="card text-white bg-info mb-3 mr-3" style="max-width: 18rem;">
-                            <div class="card-body">
-                                <p class="card-text">{{ $month }}</p>
-                                <h4 class="text-white"><strong>02</strong></h4>
-                            </div>
-                        </div>
-
-                        <div class="card text-white bg-info mb-3 mr-3" style="max-width: 18rem;">
-                            <div class="card-body">
-                                <p class="card-text">{{ $month }}</p>
-                                <h4 class="text-white"><strong>03</strong></h4>
-                            </div>
-                        </div>
-
-                        <div class="card text-white bg-info mb-3 mr-3" style="max-width: 18rem;">
-                            <div class="card-body">
-                                <p class="card-text">{{ $month }}</p>
-                                <h4 class="text-white"><strong>04</strong></h4>
-                            </div>
-                        </div>
-
-                        <div class="card text-white bg-info mb-3 mr-3" style="max-width: 18rem;">
-                            <div class="card-body">
-                                <p class="card-text">{{ $month }}</p>
-                                <h4 class="text-white"><strong>05</strong></h4>
-                            </div>
-                        </div>
-
-                        <div class="card text-white bg-info mb-3 mr-3" style="max-width: 18rem;">
-                            <div class="card-body">
-                                <p class="card-text">{{ $month }}</p>
-                                <h4 class="text-white"><strong>06</strong></h4>
-                            </div>
-                        </div>
-
-                        <div class="card text-white bg-info mb-3 mr-3" style="max-width: 18rem;">
-                            <div class="card-body">
-                                <p class="card-text">{{ $month }}</p>
-                                <h4 class="text-white"><strong>07</strong></h4>
-                            </div>
-                        </div>
-
-                        <div class="card text-white bg-info mb-3 mr-3" style="max-width: 18rem;">
-                            <div class="card-body">
-                                <p class="card-text">{{ $month }}</p>
-                                <h4 class="text-white"><strong>08</strong></h4>
-                            </div>
-                        </div>
-
-                        <div class="card text-white bg-info mb-3 mr-3" style="max-width: 18rem;">
-                            <div class="card-body">
-                                <p class="card-text">{{ $month }}</p>
-                                <h4 class="text-white"><strong>09</strong></h4>
-                            </div>
-                        </div>
-
-                        <div class="card text-white bg-info mb-3 mr-3" style="max-width: 18rem;">
-                            <div class="card-body">
-                                <p class="card-text">{{ $month }}</p>
-                                <h4 class="text-white"><strong>10</strong></h4>
-                            </div>
-                        </div>
-
-                        <div class="card text-white bg-info mb-3 mr-3" style="max-width: 18rem;">
-                            <div class="card-body">
-                                <p class="card-text">{{ $month }}</p>
-                                <h4 class="text-white"><strong>11</strong></h4>
-                            </div>
-                        </div>
-
-                        <div class="card text-white bg-info mb-3 mr-3" style="max-width: 18rem;">
-                            <div class="card-body">
-                                <p class="card-text">{{ $month }}</p>
-                                <h4 class="text-white"><strong>12</strong></h4>
-                            </div>
-                        </div>
-
-                        <div class="card text-white bg-info mb-3 mr-3" style="max-width: 18rem;">
-                            <div class="card-body">
-                                <p class="card-text">{{ $month }}</p>
-                                <h4 class="text-white"><strong>13</strong></h4>
-                            </div>
-                        </div>
-
-                        <div class="card text-white bg-info mb-3 mr-3" style="max-width: 18rem;">
-                            <div class="card-body">
-                                <p class="card-text">{{ $month }}</p>
-                                <h4 class="text-white"><strong>14</strong></h4>
-                            </div>
-                        </div>
-
-                        <div class="card text-white bg-info mb-3 mr-3" style="max-width: 18rem;">
-                            <div class="card-body">
-                                <p class="card-text">{{ $month }}</p>
-                                <h4 class="text-white"><strong>15</strong></h4>
-                            </div>
-                        </div>
-
-                        <div class="card text-white bg-info mb-3 mr-3" style="max-width: 18rem;">
-                            <div class="card-body">
-                                <p class="card-text">{{ $month }}</p>
-                                <h4 class="text-white"><strong>16</strong></h4>
-                            </div>
-                        </div>
-
-                        <div class="card text-white bg-info mb-3 mr-3" style="max-width: 18rem;">
-                            <div class="card-body">
-                                <p class="card-text">{{ $month }}</p>
-                                <h4 class="text-white"><strong>17</strong></h4>
-                            </div>
-                        </div>
-
-                        <div class="card text-white bg-info mb-3 mr-3" style="max-width: 18rem;">
-                            <div class="card-body">
-                                <p class="card-text">{{ $month }}</p>
-                                <h4 class="text-white"><strong>18</strong></h4>
-                            </div>
-                        </div>
-
-                        <div class="card text-white bg-info mb-3 mr-3" style="max-width: 18rem;">
-                            <div class="card-body">
-                                <p class="card-text">{{ $month }}</p>
-                                <h4 class="text-white"><strong>19</strong></h4>
-                            </div>
-                        </div>
-
-                        <div class="card text-white bg-info mb-3 mr-3" style="max-width: 18rem;">
-                            <div class="card-body">
-                                <p class="card-text">{{ $month }}</p>
-                                <h4 class="text-white"><strong>20</strong></h4>
-                            </div>
-                        </div>
-
-                        <div class="card text-white bg-info mb-3 mr-3" style="max-width: 18rem;">
-                            <div class="card-body">
-                                <p class="card-text">{{ $month }}</p>
-                                <h4 class="text-white"><strong>21</strong></h4>
-                            </div>
-                        </div>
-
-                        <div class="card text-white bg-info mb-3 mr-3" style="max-width: 18rem;">
-                            <div class="card-body">
-                                <p class="card-text">{{ $month }}</p>
-                                <h4 class="text-white"><strong>22</strong></h4>
-                            </div>
-                        </div>
-
-                        <div class="card text-white bg-info mb-3 mr-3" style="max-width: 18rem;">
-                            <div class="card-body">
-                                <p class="card-text">{{ $month }}</p>
-                                <h4 class="text-white"><strong>23</strong></h4>
-                            </div>
-                        </div>
-
-                        <div class="card text-white bg-info mb-3 mr-3" style="max-width: 18rem;">
-                            <div class="card-body">
-                                <p class="card-text">{{ $month }}</p>
-                                <h4 class="text-white"><strong>24</strong></h4>
-                            </div>
-                        </div>
-                        <div class="card text-white bg-info mb-3 mr-3" style="max-width: 18rem;">
-                            <div class="card-body">
-                                <p class="card-text">{{ $month }}</p>
-                                <h4 class="text-white"><strong>25</strong></h4>
-                            </div>
-                        </div><div class="card text-white bg-info mb-3 mr-3" style="max-width: 18rem;">
-                            <div class="card-body">
-                                <p class="card-text">{{ $month }}</p>
-                                <h4 class="text-white"><strong>26</strong></h4>
-                            </div>
-                        </div>
-
-                        <div class="card text-white bg-info mb-3 mr-3" style="max-width: 18rem;">
-                            <div class="card-body">
-                                <p class="card-text">{{ $month }}</p>
-                                <h4 class="text-white"><strong>27</strong></h4>
-                            </div>
-                        </div>
-
-                        <div class="card text-white bg-info mb-3 mr-3" style="max-width: 18rem;">
-                            <div class="card-body">
-                                <p class="card-text">{{ $month }}</p>
-                                <h4 class="text-white"><strong>28</strong></h4>
-                            </div>
-                        </div>
-
-                        <div class="card text-white bg-info mb-3 mr-3" style="max-width: 18rem;">
-                            <div class="card-body">
-                                <p class="card-text">{{ $month }}</p>
-                                <h4 class="text-white"><strong>29</strong></h4>
-                            </div>
-                        </div>
-
-                        <div class="card text-white bg-info mb-3 mr-3" style="max-width: 18rem;">
-                            <div class="card-body">
-                                <p class="card-text">{{ $month }}</p>
-                                <h4 class="text-white"><strong>30</strong></h4>
-                            </div>
-                        </div>
-
-                        <div class="card text-white bg-info mb-3 mr-3" style="max-width: 18rem;">
-                            <div class="card-body">
-                                <p class="card-text">{{ $month }}</p>
-                                <h4 class="text-white"><strong>31</strong></h4>
-                            </div>
+                        <div class="col-lg-6"></div>
+                        <div class="col-lg-6 mb-3 mt-3">
+                            <strong>
+                                <h4>- Pick Your Date -</h4>
+                            </strong>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-lg-6"></div>
+                        <div class="col-lg-6"
+                            style="box-shadow: -20px -3px 21px -9px rgba(212,212,212,0.75); padding: 10px;">
+                            <div class="row">
+
+                                <div class="col-lg-6">
+                                    <div class="form-group mr-2">
+                                        <label for="" class="label"><strong>Select your booking date</strong></label>
+                                        <input type="text" class="form-control" id="book_pick_date" name="start"
+                                            placeholder="yyyy-mm-dd" value="{{ old('start') }}">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group ml-2">
+                                        <label for="" class="label"><strong>Select your return date</strong></label>
+                                        <input type="text" class="form-control" id="book_off_date" name="end"
+                                            placeholder="yyyy-mm-dd" value="{{ old('end') }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-secondary btn-block py-3 px-4"><strong> Rent a Car
+                                    Now</strong></button>
+                        </div>
+                    </div>
+                    <hr>
                 </form>
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h3><strong>Booking Calendar</strong></h3>
+                    </div>
+                    <div id="calendar"></div>
+                </div>
             </div>
         </div>
     </div>
 </section>
 @include('component.footer')
+@push('after-script')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // page is now ready, initialize the calendar...
+        $('#calendar').fullCalendar({
+            // put your options and callbacks here
+            events: [
+                @foreach($calendar as $o) {
+                    title: '{{ $o->book_code }}',
+                    start: '{{ $o->booking_date }}',
+                    end: '{{ $o->return_date }}',
+                },
+                @endforeach
+            ]
+        })
+    });
+
+</script>
+@endpush
 @endsection

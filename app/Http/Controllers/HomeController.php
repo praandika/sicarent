@@ -23,6 +23,13 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index(){
-        return view('admin.dashboard');
+        if (Auth::user()->access == "user") {
+            $data = Booking::join('users','booking.user_id','=','users.id')
+            ->join('cars','booking_car_id','=','cars.id')
+            ->get();
+            return view('admin.dashboard', compact('data'));
+        } else {
+            return view('admin.dashboard');
+        }
     }
 }

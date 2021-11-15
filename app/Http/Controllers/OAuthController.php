@@ -20,7 +20,7 @@ class OAuthController extends Controller
             $cekUser = User::where('google_id', $user->getId())->first();
             if ($cekUser) {
                 Auth::login($cekUser);
-                return redirect('/');
+                return redirect()->route('landing.page');
             }else{
                 $newUser = User::create([
                     'name' => $user->getName(),
@@ -31,11 +31,11 @@ class OAuthController extends Controller
                     'password' => bcrypt('12345678')
                 ]);
                 Auth::login($newUser);
-                return redirect('/');
+                return redirect()->route('landing.page');
 
             }
         } catch (\Throwable $th) {
-            //throw $th;
+            return redirect('auth/google');
         }
     }
 }

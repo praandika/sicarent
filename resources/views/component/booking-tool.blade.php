@@ -24,7 +24,7 @@
                             </div>
                         
                             <div class="form-group">
-                                <input type="submit" value="Rent A Car Now" class="btn btn-secondary py-3 px-4">
+                                <input type="submit" value="Find my Car" class="btn btn-secondary py-3 px-4">
                             </div>
                         </form>
                     </div>
