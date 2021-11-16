@@ -94,5 +94,6 @@ Route::get('calendar', [App\Http\Controllers\HomeController::class, 'calendar'])
 
 // Return
 Route::get('return', [App\Http\Controllers\BookingController::class, 'return'])->name('return');
-Route::get('return/process', [App\Http\Controllers\BookingController::class, 'returnProcess'])->name('return.process');
+Route::get('return/edit/{invoice}', [App\Http\Controllers\BookingController::class, 'returnEdit'])->name('return.edit');
+Route::get('return/update', [App\Http\Controllers\BookingController::class, 'returnUpdate'])->name('return.update');
 // END Return

@@ -63,50 +63,48 @@ class BookingController extends Controller
         $start = Booking::where([
             ['car_id',$req->id],
             ['booking_date',$req->start],
-        ])->count();
+        ])->count(); 
+        // Jika tgl sama maka > 0
         $end = Booking::where([
             ['car_id',$req->id],
             ['return_date',$req->end],
-        ])->count();
+        ])->pluck('return_date');
+        // Jika tgl sama maka > 0
+        dd($start, $end);
 
-        if ($start > 0) {
+        if (($start == 0) && ($end == 0)) {
+            User::where('id', Auth::user()->id)->update([
+                'phone' => $req->phone,
+                'address' => $req->address,
+                'residence_idcard' => $req-> idcard,
+            ]);
+            
+            $book = new Booking;
+            $book->book_code = $bookCode;
+            $book->user_id = Auth::user()->id;
+            $book->car_id = $req->id;
+            $book->booking_date = $req->start;
+            $book->return_date = $req->end;
+            $book->save();
+            
+            $bookId = Booking::where('book_code',$bookCode)->pluck('id');
+
+            $pay = new Payment;
+            $pay->invoice = $bookCode;
+            $pay->booking_id = $bookId[0];
+            $pay->payment_date = $dateNow;
+            $pay->fines = 0;
+            $pay->total = $req->grandtotal;
+            $pay->changes = 0;
+            $pay->overtime = 0;
+            $pay->save();
+
+            alert()->success('Welcome',Auth::user()->name.' please confirm your payment to get invoice');
+            return redirect()->route('dashboard');
+
+        } else {
             alert()->warning('Warning','Booking date is full, please choose another date');
             return redirect()->back()->withInput();
-        } elseif($start == 0 ) {
-            if ($end > 0) {
-                alert()->warning('Warning','Booking date is full, please choose another date');
-                return redirect()->back()->withInput();
-            } else {
-                User::where('id', Auth::user()->id)->update([
-                    'phone' => $req->phone,
-                    'address' => $req->address,
-                    'residence_idcard' => $req-> idcard,
-                    'account_number' => $req->account_number
-                ]);
-                
-                $book = new Booking;
-                $book->book_code = $bookCode;
-                $book->user_id = Auth::user()->id;
-                $book->car_id = $req->id;
-                $book->booking_date = $req->start;
-                $book->return_date = $req->end;
-                $book->save();
-                
-                $bookId = Booking::where('book_code',$bookCode)->pluck('id');
-
-                $pay = new Payment;
-                $pay->invoice = $bookCode;
-                $pay->booking_id = $bookId[0];
-                $pay->payment_date = $dateNow;
-                $pay->fines = 0;
-                $pay->total = $req->grandtotal;
-                $pay->changes = 0;
-                $pay->overtime = 0;
-                $pay->save();
-
-                alert()->success('Welcome',Auth::user()->name.' please confirm your payment to get invoice');
-                return redirect()->route('dashboard');
-            }
         }
     }
 
@@ -129,5 +127,19 @@ class BookingController extends Controller
         $data = Payment::join('bookings','payments.booking_id','=','bookings.id')
         ->get();
         return view('admin.return', compact('data'));
+    }
+
+    public function returnEdit($invoice){
+        $data = Payment::join('bookings','payments.booking_id','=','bookings.id')
+        ->where('invoice',$invoice)
+        ->get();
+        return view('admin.edit.returnedit',compact('data'));
+    }
+
+    public function returnUpdate(Request $req){
+        Payment::where('id',$req->id)->update([
+            'fines' => $req->fines,
+            'overtime' => $req->overtime,
+        ]);
     }
 }

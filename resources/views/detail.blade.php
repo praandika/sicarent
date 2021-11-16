@@ -113,15 +113,20 @@
                     </div>
                     @endforeach
                     <div class="row">
-                        <div class="col-lg-6"></div>
+                        <div class="col-lg-6 mb-3 mt-3">
+                            <strong>
+                                <h4>- Personal Data -</h4>
+                            </strong>
+                        </div>
                         <div class="col-lg-6 mb-3 mt-3">
                             <strong>
                                 <h4>- Pick Your Date -</h4>
                             </strong>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-6" style="box-shadow: -20px -3px 21px -9px rgba(212,212,212,0.75); padding: 10px;">
+                    <div class="row" style="border: 4px dotted black; padding: 10px;">
+                        <div class="col-lg-6"
+                            style="box-shadow: -20px -3px 21px -9px rgba(212,212,212,0.75); padding: 10px;">
                             <div class="row">
                                 <div class="form-group">
                                     <label for="" class="label">Phone</label>
@@ -133,12 +138,6 @@
                                     <label for="" class="label">ID Card (KTP/Passpor)</label>
                                     <input type="text" class="form-control" name="idcard"
                                         placeholder="Enter your ID Card Number" value="{{ old('idcard') }}" required>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="" class="label">Account Number</label>
-                                    <input type="number" class="form-control" name="account_number"
-                                        placeholder="Enter your Account Number" value="{{ old('account_number') }}" required>
                                 </div>
 
                                 <div class="form-group">

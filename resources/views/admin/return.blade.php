@@ -19,6 +19,8 @@
                                 <th>Mobil</th>
                                 <th>Booking Date</th>
                                 <th>Return Date</th>
+                                <th>Overtimes</th>
+                                <th>Fines</th>
                                 <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
@@ -32,9 +34,11 @@
                                 <td> {{ $o->booking->car->car_name }} </td>
                                 <td> {{ Carbon\Carbon::parse($o->booking_date)->format('D d M Y') }} </td>
                                 <td> {{ Carbon\Carbon::parse($o->return_date)->format('D d M Y') }} </td>
+                                <td> {{ $o->overtime }} </td>
+                                <td> Rp {{ number_format($o->fines, 0, ',', '.') }} </td>
                                 <td> {{ $o->booking_status  }} </td>
                                 <td>
-                                    <a href="{{ route('return.process',$o->book_code) }}" data-toggle="tooltip" data-placement="top" title="Check Return" class="btn btn-primary"><i class="fas fa-check"></i></a>
+                                    <a href="{{ route('return.edit',$o->book_code) }}" data-toggle="tooltip" data-placement="top" title="Check Return" class="btn btn-primary"><i class="fas fa-check"></i></a>
                                 </td>
                             </tr>
                             @empty
@@ -50,6 +54,8 @@
                                 <th>Mobil</th>
                                 <th>Booking Date</th>
                                 <th>Return Date</th>
+                                <th>Overtimes</th>
+                                <th>Fines</th>
                                 <th>Status</th>
                                 <th>Aksi</th>
                             </tr>

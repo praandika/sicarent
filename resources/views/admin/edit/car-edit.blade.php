@@ -40,7 +40,7 @@
                             <!-- Brand -->
                             <div class="form-group">
                                 <label for="brand">Brand</label>
-                                <input type="brand" id="brand" class="form-control" name="car_brand"
+                                <input type="text" id="brand" class="form-control" name="car_brand"
                                     placeholder="Ubah brand..." value="{{ $o->car_brand }}" required>
                             </div>
                             <!-- Transmisi -->
