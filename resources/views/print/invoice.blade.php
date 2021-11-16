@@ -56,7 +56,7 @@
             padding-top: 12px;
             padding-bottom: 12px;
             text-align: left;
-            background-color: #00A19D;
+            background-color: #0F52BA;
             color: white;
         }
 

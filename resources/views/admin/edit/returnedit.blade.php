@@ -70,6 +70,7 @@
                             <!-- Fines -->
                             <h2>Duration</h2>
                             <h2><span id="duration"></span> day(s)</h2>
+                            <input type="hidden" id="durationInput" name="duration" required>
                         </div>
                         <div class="col-lg-4">
                             <h2>Overtimes</h2>
@@ -104,13 +105,14 @@
 <script>
     $(document).ready(function () {
         $('body').on('change', '#return', function () {
-            let start = moment($('#start').val()).format('YYYYMD');
-            let end = moment($('#end').val()).format('YYYYMD');
-            let retrn = moment($('#return').val()).format('YYYYMD');
+            let start = moment($('#start').val()).format('YYYYMDD');
+            let end = moment($('#end').val()).format('YYYYMDD');
+            let retrn = moment($('#return').val()).format('YYYYMDD');
             let duration = end - start;
             let over = retrn - end;
             let fines = over * 20000;
             $('#duration').text(duration);
+            $('#durationInput').val(duration);
             $('#over').text(over);
             $('#overInput').val(over);
             $('#fines').text(new Intl.NumberFormat('id-ID', {

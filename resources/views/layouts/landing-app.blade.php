@@ -26,11 +26,26 @@
         html {
             scroll-behavior: smooth;
         }
+
     </style>
+
+    <script type="text/javascript">
+        window.$crisp = [];
+        window.CRISP_WEBSITE_ID = "d4026b60-c9b4-46b8-9de6-d01b2a88bdde";
+        (function () {
+            d = document;
+            s = d.createElement("script");
+            s.src = "https://client.crisp.chat/l.js";
+            s.async = 1;
+            d.getElementsByTagName("head")[0].appendChild(s);
+        })();
+
+    </script>
+
 </head>
 
 <body>
-@include('sweetalert::alert')
+    @include('sweetalert::alert')
     @yield('landing-content')
 
     <!-- loader -->
@@ -39,7 +54,7 @@
             <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
                 stroke="#F96D00" /></svg></div>
 
-    
+
     @stack('before-script')
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/jquery-migrate-3.0.1.min.js') }}"></script>

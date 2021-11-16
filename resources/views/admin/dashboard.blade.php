@@ -139,11 +139,164 @@
     </div>
 </div>
 @else
-haha
+<div class="row">
+    <div class="col-lg-3 col-6">
+        <!-- small card -->
+        <div class="small-box bg-info">
+            <div class="inner">
+                <h3>Rp {{ number_format($incomeMonth, 0, ',', '.') }}</h3>
+
+                <p>Pendapatan Bulan Ini</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-wallet"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-6">
+        <!-- small card -->
+        <div class="small-box bg-success">
+            <div class="inner">
+                <h3>Rp {{ number_format($incomeDay, 0, ',', '.') }}</h3>
+
+                <p>Pendapatan Hari Ini</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-file-invoice-dollar"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-6">
+        <!-- small card -->
+        <div class="small-box bg-warning">
+            <div class="inner">
+                <h3>{{ $customer }}</h3>
+
+                <p>Customer</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-users"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-6">
+        <!-- small card -->
+        <div class="small-box bg-danger">
+            <div class="inner">
+                <h3>Rp {{ number_format($unpaid, 0, ',', '.') }}</h3>
+
+                <p>Belum Dibayar</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-times"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-success"><i class="fas fa-check"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Booking {{ $month }}</span>
+                <span class="info-box-number">{{ $bookedCar }}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-warning"><i class="fas fa-star"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Mobil Favorite</span>
+                <span class="info-box-number">{{ $favorite }}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-danger"><i class="fas fa-cog"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Automatic</span>
+                <span class="info-box-number">{{ $at }}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-info"><i class="fas fa-cogs"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Manual</span>
+                <span class="info-box-number">{{ $mt }}</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Chart's container -->
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Booking {{ $yearNow }} vs {{ $yearLast }}</h5>
+        <div id="chart" style="height: 300px;"></div>
+    </div>
+</div>
+
+<!-- Chart's container -->
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Favorite Car</h5>
+        <div id="chartCar" style="height: 300px;"></div>
+    </div>
+</div>
+
 @endif
 @endsection
 
 @push('after-script')
+<!-- Charting library -->
+<script src="https://unpkg.com/echarts/dist/echarts.min.js"></script>
+<!-- Chartisan -->
+<script src="https://unpkg.com/@chartisan/echarts/dist/chartisan_echarts.js"></script>
+<!-- Your application script -->
+<script>
+    const chart = new Chartisan({
+        el: '#chart',
+        url: '@chart("booking_chart")',
+        hooks: new ChartisanHooks()
+            .legend({
+                position: 'bottom'
+            })
+            .datasets([{
+                type: 'line',
+                fill: false
+            }, 'bar'])
+    });
+
+</script>
+
+<script>
+    const chartCar = new Chartisan({
+        el: '#chartCar',
+        url: '@chart("car_chart")',
+        hooks: new ChartisanHooks()
+            .legend({
+                position: 'bottom'
+            })
+            .datasets('doughnut')
+    });
+
+</script>
+
 <script>
     $(function () {
         $("#datatb").DataTable();

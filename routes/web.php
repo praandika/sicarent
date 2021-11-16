@@ -95,5 +95,21 @@ Route::get('calendar', [App\Http\Controllers\HomeController::class, 'calendar'])
 // Return
 Route::get('return', [App\Http\Controllers\BookingController::class, 'return'])->name('return');
 Route::get('return/edit/{invoice}', [App\Http\Controllers\BookingController::class, 'returnEdit'])->name('return.edit');
-Route::get('return/update', [App\Http\Controllers\BookingController::class, 'returnUpdate'])->name('return.update');
+Route::post('return/update', [App\Http\Controllers\BookingController::class, 'returnUpdate'])->name('return.update');
 // END Return
+
+// Laporan
+Route::get('report', [App\Http\Controllers\ReportController::class, 'index'])->name('report');
+
+Route::get('report/book', [App\Http\Controllers\ReportController::class, 'bookReport'])->name('report.book');
+
+Route::get('report/pay', [App\Http\Controllers\ReportController::class, 'payReport'])->name('report.pay');
+
+Route::get('report/book/search', [App\Http\Controllers\ReportController::class, 'bookReportSearch'])->name('report.book.search');
+
+Route::get('report/pay/search', [App\Http\Controllers\ReportController::class, 'payReportSearch'])->name('report.pay.search');
+
+Route::get('export/book/{awal}/{akhir}', [App\Http\Controllers\ReportController::class, 'exportBook'])->name('export');
+
+Route::get('export/pay/{awal}/{akhir}', [App\Http\Controllers\ReportController::class, 'exportPay'])->name('export');
+// END Laporan

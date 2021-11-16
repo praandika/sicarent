@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use PDF;
 
 class BookingController extends Controller
 {
@@ -68,9 +69,9 @@ class BookingController extends Controller
         $end = Booking::where([
             ['car_id',$req->id],
             ['return_date',$req->end],
-        ])->pluck('return_date');
+        ])->count();
         // Jika tgl sama maka > 0
-        dd($start, $end);
+        // dd($start, $end);
 
         if (($start == 0) && ($end == 0)) {
             User::where('id', Auth::user()->id)->update([
@@ -125,6 +126,7 @@ class BookingController extends Controller
 
     public function return(){
         $data = Payment::join('bookings','payments.booking_id','=','bookings.id')
+        ->where('booking_status','=','on the road')
         ->get();
         return view('admin.return', compact('data'));
     }
@@ -137,9 +139,26 @@ class BookingController extends Controller
     }
 
     public function returnUpdate(Request $req){
-        Payment::where('id',$req->id)->update([
+        $invoice = $req->invoice;
+        Payment::where('invoice',$req->invoice)->update([
             'fines' => $req->fines,
             'overtime' => $req->overtime,
         ]);
+
+        Booking::where('book_code',$req->invoice)->update([
+            'booking_status' => 'return',
+        ]);
+
+        $data = Payment::join('bookings','payments.booking_id','=','bookings.id')
+        ->where('invoice',$invoice)
+        ->get();
+
+        $duration = $req->duration;
+        $overtime = $req->overtime;
+        $fines = $req->fines;
+        // dd($fines);
+
+        $pdf = PDF::loadview('print.return',compact('data','duration','invoice','overtime','fines'));
+        return $pdf->download('Return_'.$invoice.'.pdf');
     }
 }

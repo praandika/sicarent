@@ -25,7 +25,7 @@ class PaymentController extends Controller
         $proof->move($dir_proof,$file_name);
 
         Booking::where('book_code',$req->invoice)->update([
-            'booking_status' => "valid",
+            'booking_status' => "on the road",
         ]);
 
         Payment::where('invoice',$req->invoice)->update([

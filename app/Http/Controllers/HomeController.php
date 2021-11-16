@@ -7,7 +7,9 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Payment;
 use App\Models\Booking;
+use App\Models\Car;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 
 class HomeController extends Controller
@@ -49,9 +51,35 @@ class HomeController extends Controller
             ->sum('total');
 
             return view('admin.dashboard', compact('data','count_booking','paid','unpaid','count_next'));
+
         } else {
-            $calendar = Booking::all();
-            return view('admin.dashboard', compact('calendar'));
+            $dayNow = Carbon::now('GMT+8')->format('d');
+            $monthNow = Carbon::now('GMT+8')->format('m');
+            $yearNow = Carbon::now('GMT+8')->format('Y');
+            $month = Carbon::now('GMT+8')->format('F');
+            $yearLast = $yearNow-1;
+
+            $incomeMonth = Payment::whereMonth('payment_date',$monthNow)->sum('total');
+            $incomeDay = Payment::whereMonth('payment_date',$dayNow)->sum('total');
+            $customer = User::where('access','user')->count();
+            $bookedCar = Booking::whereMonth('booking_date',$monthNow)
+            ->count();
+            $returnedCar = Booking::whereMonth('booking_date',$monthNow)
+            ->where('booking_status','return')
+            ->count();
+            $unpaid = Payment::where('payment_status','unpaid')
+            ->sum('total');
+            $fav = DB::table('bookings')
+            ->join('cars','bookings.car_id','=','cars.id')
+            ->select(DB::raw('count(cars.car_name) as car_count, car_name'))
+            ->groupBy('car_name')
+            ->orderBy('car_count','desc')
+            ->pluck('cars.car_name');
+            $favorite = $fav[0];
+            $at = Car::where('transmition','AT')->count();
+            $mt = Car::where('transmition','MT')->count();
+
+            return view('admin.dashboard', compact('incomeMonth','incomeDay','customer','bookedCar','returnedCar','unpaid','month','favorite','at','mt','yearNow','yearLast'));
         }
     }
 
