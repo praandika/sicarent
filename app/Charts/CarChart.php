@@ -20,18 +20,21 @@ class CarChart extends BaseChart
     {
         $fav = DB::table('bookings')
             ->join('cars','bookings.car_id','=','cars.id')
+            ->select(DB::raw('count(car_name) as car_count, car_name'))
             ->groupBy('car_name')
             ->orderBy('car_count','desc')
             ->pluck('cars.car_name');
+       
 
         $count = DB::table('bookings')
             ->join('cars','bookings.car_id','=','cars.id')
-            ->groupBy('car_name')
+            ->select(DB::raw('count(cars.car_name) as car_count, cars.car_name'))
+            ->groupBy('cars.car_name')
             ->orderBy('car_count','desc')
-            ->count('cars.car_name');
+            ->pluck('car_count');
 
         return Chartisan::build()
-            ->labels([$fav])
+            ->labels(array($fav))
             ->dataset('Favorite Car', [$count]);
     }
 }
