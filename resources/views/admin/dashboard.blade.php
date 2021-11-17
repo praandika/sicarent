@@ -252,12 +252,12 @@
 </div>
 
 <!-- Chart's container -->
-<div class="card">
+<!-- <div class="card">
     <div class="card-body">
         <h5 class="card-title">Favorite Car</h5>
         <div id="chartCar" style="height: 300px;"></div>
     </div>
-</div>
+</div> -->
 
 @endif
 @endsection
@@ -285,15 +285,15 @@
 </script>
 
 <script>
-    const chartCar = new Chartisan({
-        el: '#chartCar',
-        url: '@chart("car_chart")',
-        hooks: new ChartisanHooks()
-            .legend({
-                position: 'bottom'
-            })
-            .datasets('doughnut')
-    });
+    // const chartCar = new Chartisan({
+    //     el: '#chartCar',
+    //     url: '@chart("car_chart")',
+    //     hooks: new ChartisanHooks()
+    //         .legend({
+    //             position: 'bottom'
+    //         })
+    //         .datasets('doughnut')
+    // });
 
 </script>
 
