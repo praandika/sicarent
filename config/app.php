@@ -168,7 +168,6 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
-        \Chatify\ChatifyServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
 
         /*
@@ -236,7 +235,6 @@ return [
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
-        'Chatify' => Chatify\Facades\ChatifyMessenger::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
     ],

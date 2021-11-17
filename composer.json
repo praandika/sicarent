@@ -17,7 +17,6 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
         "maatwebsite/excel": "^3.1",
-        "munafio/chatify": "^1.2",
         "realrashid/sweet-alert": "^4.1"
     },
     "require-dev": {
