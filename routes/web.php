@@ -113,3 +113,12 @@ Route::get('export/book/{awal}/{akhir}', [App\Http\Controllers\ReportController:
 
 Route::get('export/pay/{awal}/{akhir}', [App\Http\Controllers\ReportController::class, 'exportPay'])->name('export');
 // END Laporan
+
+// Damage
+Route::get('damage', [App\Http\Controllers\DamageController::class, 'index'])->name('damage.read');
+Route::get('damage/show/{id}', [App\Http\Controllers\DamageController::class, 'show'])->name('damage.show');
+Route::get('damage/create', [App\Http\Controllers\DamageController::class, 'create'])->name('damage.create');
+Route::post('damage/store', [App\Http\Controllers\DamageController::class, 'store'])->name('damage.store');
+Route::get('damage/edit/{id}', [App\Http\Controllers\DamageController::class, 'edit'])->name('damage.edit');
+Route::post('damage/update', [App\Http\Controllers\DamageController::class, 'update'])->name('damage.update');
+// END Damage

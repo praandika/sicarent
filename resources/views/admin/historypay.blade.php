@@ -23,6 +23,7 @@
                                 <th>Mobil</th>
                                 <th>Total</th>
                                 <th>Status</th>
+                                <th>Cetak Invoice</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -34,6 +35,9 @@
                                 <td> {{ $o->booking->car->car_name }} </td>
                                 <td> Rp {{ number_format($o->total, 0, ',', '.') }} </td>
                                 <td> {{ $o->payment_status  }} </td>
+                                <td>
+                                    <a href="{{ url('print/'.$o->invoice) }}" class="btn btn-success"><i class="fas fa-print"></i> Print</a>
+                                </td>
                             </tr>
                             @empty
                             <tr>
@@ -48,6 +52,7 @@
                                 <th>Mobil</th>
                                 <th>Total</th>
                                 <th>Status</th>
+                                <th>Cetak Invoice</th>
                             </tr>
                         </tfoot>
                     </table>

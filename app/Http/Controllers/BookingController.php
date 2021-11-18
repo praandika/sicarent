@@ -114,11 +114,13 @@ class BookingController extends Controller
             $data = Booking::join('users','bookings.user_id','=','users.id')
             ->join('cars','bookings.car_id','=','cars.id')
             ->where('user_id',Auth::user()->id)
+            ->orderBy('bookings.id', 'desc')
             ->get();
             return view('admin.historybook', compact('data'));
         }else{
             $data = Booking::join('users','bookings.user_id','=','users.id')
             ->join('cars','bookings.car_id','=','cars.id')
+            ->orderBy('bookings.id', 'desc')
             ->get();
             return view('admin.historybook', compact('data'));
         }

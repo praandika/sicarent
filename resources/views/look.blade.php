@@ -104,9 +104,15 @@
                         <img src="{{ asset('images/car/'.$o->image) }}" class="img-fluid">
                     </div>
                     <div class="col-lg-4 my-auto">
+                    @if( (!Auth::user()) || (Auth::user()->access == 'user'))
                         <a href="{{ url('detail/2/'.$o->id.'/'.$o->price) }}"
                                 class="btn btn-primary btn-block py-2 mr-1">Book
                                 now</a>
+                    @else
+                        <a href="#"
+                                class="btn btn-primary btn-block py-2 mr-1">Book
+                                now</a>
+                    @endif
                     </div>
                 </div>
 

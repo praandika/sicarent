@@ -8,9 +8,13 @@ use App\Models\Booking;
 use PDF;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-
 class PaymentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function confirm($invoice){
         $data = Payment::join('bookings','payments.booking_id','=','bookings.id')
             ->where('invoice',$invoice)
@@ -58,11 +62,10 @@ class PaymentController extends Controller
             ->pluck('return_date');
             
 
-            $start = Carbon::parse($tglA[0])->format('Ymd');
+            $start = Carbon::parse($tglA[0]);
             
-            $end = Carbon::parse($tglB[0])->format('Ymd');
-
-            $duration = $end - $start;
+            $end = Carbon::parse($tglB[0]);
+            $duration = $end->diffInDays($start);
 
         $pdf = PDF::loadview('print.invoice',compact('data','duration','invoice'));
         return $pdf->download('Invoice_'.$invoice.'.pdf');
@@ -72,10 +75,12 @@ class PaymentController extends Controller
         if(Auth::user()->access == "user"){
             $data = Payment::join('bookings','payments.booking_id','=','bookings.id')
             ->where('bookings.user_id',Auth::user()->id)
+            ->orderBy('payments.id', 'desc')
             ->get();
             return view('admin.historypay', compact('data'));
         }else{
             $data = Payment::join('bookings','payments.booking_id','=','bookings.id')
+            ->orderBy('payments.id', 'desc')
             ->get();
             return view('admin.historypay', compact('data'));
         }

@@ -28,6 +28,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- iCheck for checkboxes and radio inputs -->
     <link rel="stylesheet" href="{{ asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
     @stack('after-css')
+
+    @if(Auth::user()->access == "user")
+    <script type="text/javascript">
+        window.$crisp = [];
+        window.CRISP_WEBSITE_ID = "d4026b60-c9b4-46b8-9de6-d01b2a88bdde";
+        (function () {
+            d = document;
+            s = d.createElement("script");
+            s.src = "https://client.crisp.chat/l.js";
+            s.async = 1;
+            d.getElementsByTagName("head")[0].appendChild(s);
+        })();
+    </script>
+    @endif
 </head>
 
 <body class="hold-transition sidebar-mini">

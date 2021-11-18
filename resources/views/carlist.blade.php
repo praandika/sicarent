@@ -31,9 +31,16 @@
                             <span class="cat">{{ $o->car_brand }}</span>
                             <p class="price ml-auto">Rp {{ number_format($o->price, 0, ',', '.') }} / Day(s)</p>
                         </div>
+                        @if( (!Auth::user()) || (Auth::user()->access == 'user'))
                         <a href="{{ url('detail/2/'.$o->id.'/'.$o->price) }}"
                                 class="btn btn-primary py-2 mr-1">Book
-                                now</a> <a href="{{ route('look',$o->id) }}" class="btn btn-secondary py-2 ml-1">Details</a></p></p>
+                                now</a> 
+                        @else
+                        <a href="#"
+                                class="btn btn-primary py-2 mr-1">Book
+                                now</a>
+                        @endif
+                        <a href="{{ route('look',$o->id) }}" class="btn btn-secondary py-2 ml-1">Details</a></p></p>
                     </div>
                 </div>
             </div>

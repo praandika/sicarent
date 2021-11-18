@@ -44,7 +44,11 @@
                             </p>
                         </div>
                         <div class="row">
+                        @if( (!Auth::user()) || (Auth::user()->access == 'user'))
                             <a href="{{ url('detail/'.$token.'/'.$o->id.'/'.$o->price) }}" class="btn btn-block btn-primary">Book now</a>
+                        @else
+                            <a href="#" class="btn btn-block btn-primary">Book now</a>
+                        @endif
                         </div>
                     </div>
                 </div>

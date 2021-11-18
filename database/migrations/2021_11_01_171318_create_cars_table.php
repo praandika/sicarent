@@ -24,6 +24,7 @@ class CreateCarsTable extends Migration
             $table->string('plate_number');
             $table->string('car_capacity');
             $table->string('car_year');
+            $table->bigInteger('kilometers');
             $table->text('image');
             $table->string('fuel');
             $table->enum('car_status',['available','rented','maintenance']);

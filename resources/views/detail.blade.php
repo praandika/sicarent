@@ -166,8 +166,13 @@
                                     </div>
                                 </div>
                             </div>
+                            @if( (!Auth::user()) || (Auth::user()->access == 'user'))
                             <button type="submit" class="btn btn-secondary btn-block py-3 px-4"><strong> Rent a Car
                                     Now</strong></button>
+                            @else
+                            <button type="submit" class="btn btn-secondary btn-block py-3 px-4" disabled><strong> Rent a Car
+                                    Now</strong></button>
+                            @endif
                         </div>
                     </div>
                     <hr>
@@ -191,12 +196,26 @@
     $(document).ready(function () {
         let price = $('#price').val();
         $('body').on('change', '#book_off_date', function () {
-            let x = $('#book_pick_date').val();
-            let y = $('#book_off_date').val();
+            let start = new Date ($('#book_pick_date').val());
+            let end = new Date ($('#book_off_date').val());
             let price = $('#price').val();
-            let start = moment(x).format('YYYYMD');
-            let end = moment(y).format('YYYYMD');
-            let duration = end - start;
+            const oneDay = 24 * 60 * 60 * 1000 // hours*minutes*seconds*milliseconds
+            let duration = Math.round(Math.abs((start - end) / oneDay));
+            let total = price * duration;
+            $('#duration').text(duration);
+            $('#total').text(new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR'
+            }).format(total));
+            $('#inputTotal').val(total);
+        });
+
+        $('body').on('change', '#book_pick_date', function () {
+            let start = new Date ($('#book_pick_date').val());
+            let end = new Date ($('#book_off_date').val());
+            let price = $('#price').val();
+            const oneDay = 24 * 60 * 60 * 1000 // hours*minutes*seconds*milliseconds
+            let duration = Math.round(Math.abs((start - end) / oneDay));
             let total = price * duration;
             $('#duration').text(duration);
             $('#total').text(new Intl.NumberFormat('id-ID', {

@@ -28,6 +28,7 @@ class CarTableSeeder extends Seeder
                 'image' => 'agya.png',
                 'fuel' => 'Bensin',
                 'car_status' => 'Available',
+                'kilometers' => 2000,
                 'created_at' => Carbon::now('GMT+8')->format('Y-m-d H:i:s'),
             ],
             [
@@ -43,6 +44,7 @@ class CarTableSeeder extends Seeder
                 'image' => 'terios.jpg',
                 'fuel' => 'Bensin',
                 'car_status' => 'Available',
+                'kilometers' => 3419,
                 'created_at' => Carbon::now('GMT+8')->format('Y-m-d H:i:s'),
             ],
             [
@@ -58,6 +60,7 @@ class CarTableSeeder extends Seeder
                 'image' => 'brio.png',
                 'fuel' => 'Bensin',
                 'car_status' => 'Rented',
+                'kilometers' => 8723,
                 'created_at' => Carbon::now('GMT+8')->format('Y-m-d H:i:s'),
             ],
             [
@@ -73,6 +76,7 @@ class CarTableSeeder extends Seeder
                 'image' => 'pajero.png',
                 'fuel' => 'Bensin',
                 'car_status' => 'Rented',
+                'kilometers' => 10862,
                 'created_at' => Carbon::now('GMT+8')->format('Y-m-d H:i:s'),
             ],
         ]);

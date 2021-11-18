@@ -67,6 +67,14 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('damage.read') }}" class="nav-link">
+                        <i class="fas fa-tools"></i>
+                        <p>
+                            Data Kerusakan
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('return') }}" class="nav-link">
                         <i class="nav-icon fas fa-undo-alt"></i>
                         <p>
@@ -117,7 +125,7 @@
                 </li>
                 @endif
 
-                @if((Auth::user()->access == "admin") || (Auth::user()->access == "user"))
+                @if(Auth::user()->access == "admin")
                 <li class="nav-item">
                     <a href="https://app.crisp.chat/website/d4026b60-c9b4-46b8-9de6-d01b2a88bdde/inbox/session_a46f7585-6c5a-4b92-b0e6-14aeb4749e71/" class="nav-link">
                         <i class="nav-icon fas fa-comments"></i>

@@ -114,7 +114,7 @@
         </tr>
         <tr>
             <td>{{ $o->booking->car->car_name }}</td>
-            <td>{{ Carbon\Carbon::parse($o->booking_sate)->format('D d M Y') }}</td>
+            <td>{{ Carbon\Carbon::parse($o->booking_date)->format('D d M Y') }}</td>
             <td>{{ Carbon\Carbon::parse($o->return_date)->format('D d M Y') }}</td>
             <th>Rp {{ number_format($o->booking->car->price, 0, ',', '.')}}</th>
         </tr>

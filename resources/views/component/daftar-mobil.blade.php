@@ -23,8 +23,14 @@
                                     <p class="price ml-auto">Rp {{ number_format($o->price, 0, ',', '.') }}
                                         <span>/day</span></p>
                                 </div>
+                                @if( (!Auth::user()) || (Auth::user()->access == 'user'))
                                 <p class="d-flex mb-0 d-block"><a href="{{ url('detail/2/'.$o->id.'/'.$o->price) }}" class="btn btn-primary py-2 mr-1">Book
-                                        now</a> <a href="{{ route('look',$o->id) }}" class="btn btn-secondary py-2 ml-1">Details</a></p>
+                                        now</a>
+                                @else
+                                <p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Book
+                                        now</a>
+                                @endif
+                                <a href="{{ route('look',$o->id) }}" class="btn btn-secondary py-2 ml-1">Details</a></p>
                             </div>
                         </div>
                     </div>

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFavoritesTable extends Migration
+class CreateDamagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateFavoritesTable extends Migration
      */
     public function up()
     {
-        Schema::create('ch_favorites', function (Blueprint $table) {
-            $table->bigInteger('id');
-            $table->bigInteger('user_id');
-            $table->bigInteger('favorite_id');
+        Schema::create('damages', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedInteger('car_id');
+            $table->string('category');
+            $table->string('description');
+            $table->enum('status', ['damaged','fixed']);
             $table->timestamps();
-
-            $table->primary('id');
         });
     }
 
@@ -30,6 +30,6 @@ class CreateFavoritesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('favorites');
+        Schema::dropIfExists('damages');
     }
 }

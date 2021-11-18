@@ -31,10 +31,10 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
-                        <table>
+                        <table class="table-striped">
                             <tr>
                                 <th>Payment date</th>
-                                <th>{{ $o->payment_date }}</th>
+                                <th>: {{ $o->payment_date }}</th>
                             </tr>
                             <tr>
                                 <th>Name</th>
@@ -58,8 +58,8 @@
                                 <th>: Rp {{ number_format($o->total, 0, ',', '.') }} <th>
                             </tr>
                         </table>
+                        <a href="{{ url('print/'.$o->invoice) }}" class="btn btn-secondary py-3 px-4"><i class="fas fa-print"></i> Print</a>
                     </div>
-                    <a href="{{ url('print/'.$o->invoice) }}" class="btn btn-secondary py-3 px-4"><i class="fas fa-print"></i> Print</a>
                 </div>
                 @endforeach
             </div>

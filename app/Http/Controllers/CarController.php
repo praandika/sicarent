@@ -7,6 +7,11 @@ use App\Models\Car;
 
 class CarController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index(){
         $data = Car::orderBy('id','desc')->get();
         return view('admin.car', compact('data'));

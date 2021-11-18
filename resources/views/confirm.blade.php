@@ -27,16 +27,16 @@
                             <h2>{{ $o->invoice }}</h2>
                             <input type="hidden" name="invoice" value="{{ $o->invoice }}">
                         </div>
-                        <div class="col-lg-6">
-                            <h2>{{ $o->payment_status }}</h2>
+                        <div class="col-lg-6 text-right">
+                            <h2>{{ strtoUpper($o->payment_status) }}</h2>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
-                            <table>
+                            <table class="table-striped">
                                 <tr>
                                     <th>Payment date</th>
-                                    <th>{{ $o->payment_date }}</th>
+                                    <th>: {{ $o->payment_date }}</th>
                                 </tr>
                                 <tr>
                                     <th>Car</th>
@@ -44,21 +44,21 @@
                                 </tr>
                                 <tr>
                                     <th>Booking Date</th>
-                                    <th>{{ Carbon\Carbon::parse($o->booking_date)->format('D d M Y') }}</th>
+                                    <th>: {{ Carbon\Carbon::parse($o->booking_date)->format('D d M Y') }}</th>
                                 </tr>
                                 <tr>
                                     <th>Return Date</th>
-                                    <th>{{ Carbon\Carbon::parse($o->return_date)->format('D d M Y') }}<th>
+                                    <th>: {{ Carbon\Carbon::parse($o->return_date)->format('D d M Y') }}<th>
                                 </tr>
                                 <tr>
                                     <th>Total</th>
-                                    <th>Rp {{ number_format($o->total, 0, ',', '.') }}<th>
+                                    <th>: Rp {{ number_format($o->total, 0, ',', '.') }}<th>
                                 </tr>
                             </table>
-                            <label for="">Upload Payment Proof</label>
-                            <input type="file" name="proof" id="proof" required>
+                            <label for="">Upload Payment Proof</label> <br>
+                            <input type="file" name="proof" id="proof" required> <br>
+                            <button type="submit" class="btn btn-secondary py-3 px-4 mt-3">Confirm Payment</button>
                         </div>
-                        <button type="submit" class="btn btn-secondary py-3 px-4">Confirm Payment</button>
                     </div>
                     @endforeach
                 </form>
