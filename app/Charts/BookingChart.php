@@ -22,6 +22,9 @@ class BookingChart extends BaseChart
         $yearNow = Carbon::now('GMT+8')->format('Y');
         $yearLast = $yearNow-1;
 
+        $LY = Carbon::createFromDate($yearLast, 01, 01, 'GMT+8');
+        $TY = Carbon::createFromDate($yearNow, 12, 31, 'GMT+8');
+
         $jan = Booking::where('booking_status','return')
         ->whereMonth('booking_date',1)
         ->whereYear('booking_date',$yearNow)
@@ -142,9 +145,72 @@ class BookingChart extends BaseChart
         ->whereYear('booking_date',$yearLast)
         ->count();
 
+// ----------------------------------------------------------
+        $janTotal = Booking::where('booking_status','return')
+        ->whereMonth('booking_date',1)
+        ->whereBetween('booking_date',[$LY,$TY])
+        ->count();
+
+
+        $febTotal = Booking::where('booking_status','return')
+        ->whereMonth('booking_date',2)
+        ->whereBetween('booking_date',[$LY,$TY])
+        ->count();
+
+        $marTotal = Booking::where('booking_status','return')
+        ->whereMonth('booking_date',3)
+        ->whereBetween('booking_date',[$LY,$TY])
+        ->count();
+
+        $aprTotal = Booking::where('booking_status','return')
+        ->whereMonth('booking_date',4)
+        ->whereBetween('booking_date',[$LY,$TY])
+        ->count();
+
+        $mayTotal = Booking::where('booking_status','return')
+        ->whereMonth('booking_date',5)
+        ->whereBetween('booking_date',[$LY,$TY])
+        ->count();
+
+        $junTotal = Booking::where('booking_status','return')
+        ->whereMonth('booking_date',6)
+        ->whereBetween('booking_date',[$LY,$TY])
+        ->count();
+
+        $julTotal = Booking::where('booking_status','return')
+        ->whereMonth('booking_date',7)
+        ->whereBetween('booking_date',[$LY,$TY])
+        ->count();
+
+        $augTotal = Booking::where('booking_status','return')
+        ->whereMonth('booking_date',8)
+        ->whereBetween('booking_date',[$LY,$TY])
+        ->count();
+
+        $sepTotal = Booking::where('booking_status','return')
+        ->whereMonth('booking_date',9)
+        ->whereBetween('booking_date',[$LY,$TY])
+        ->count();
+
+        $octTotal = Booking::where('booking_status','return')
+        ->whereMonth('booking_date',10)
+        ->whereBetween('booking_date',[$LY,$TY])
+        ->count();
+
+        $novTotal = Booking::where('booking_status','return')
+        ->whereMonth('booking_date',11)
+        ->whereBetween('booking_date',[$LY,$TY])
+        ->count();
+
+        $decTotal = Booking::where('booking_status','return')
+        ->whereMonth('booking_date',12)
+        ->whereBetween('booking_date',[$LY,$TY])
+        ->count();
+
         return Chartisan::build()
         ->labels(['Jan', 'Feb', 'Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'])
         ->dataset(''.$yearNow.'', [$jan, $feb, $mar, $apr, $may, $jun, $jul, $aug, $sep, $oct, $nov, $dec])
-        ->dataset(''.$yearLast.'', [$janLY, $febLY, $marLY, $aprLY, $mayLY, $junLY, $julLY, $augLY, $sepLY, $octLY, $novLY, $decLY]);
+        ->dataset(''.$yearLast.'', [$janLY, $febLY, $marLY, $aprLY, $mayLY, $junLY, $julLY, $augLY, $sepLY, $octLY, $novLY, $decLY])
+        ->dataset('Total', [$janTotal, $febTotal, $marTotal, $aprTotal, $mayTotal, $junTotal, $julTotal, $augTotal, $sepTotal, $octTotal, $novTotal, $decTotal]);
     }
 }

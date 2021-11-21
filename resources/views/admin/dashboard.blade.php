@@ -243,6 +243,86 @@
     </div>
 </div>
 
+<hr>
+<div class="row">
+    <div class="col-lg-12 text-center">
+        <label for="">Kerusakan Mobil</label>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2 col-sm-6 col-12">
+        <div class="info-box mb-3 bg-danger">
+            <span class="info-box-icon"><i class="fas fa-cogs"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Mesin</span>
+                <span class="info-box-number">{{ $engineDam }}</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+    </div>
+
+    <div class="col-md-2 col-sm-6 col-12">
+        <div class="info-box mb-3 bg-danger">
+            <span class="info-box-icon"><i class="fas fa-car-crash"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Body</span>
+                <span class="info-box-number">{{ $bodyDam }}</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+    </div>
+
+    <div class="col-md-2 col-sm-6 col-12">
+        <div class="info-box mb-3 bg-danger">
+            <span class="info-box-icon"><i class="fas fa-fire-alt"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Lampu</span>
+                <span class="info-box-number">{{ $lampDam }}</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+    </div>
+
+    <div class="col-md-2 col-sm-6 col-12">
+        <div class="info-box mb-3 bg-danger">
+            <span class="info-box-icon"><i class="fas fa-truck-monster"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Ban</span>
+                <span class="info-box-number">{{ $tireDam }}</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+    </div>
+
+    <div class="col-md-2 col-sm-6 col-12">
+        <div class="info-box mb-3 bg-danger">
+            <span class="info-box-icon"><i class="far fa-caret-square-up"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Interior</span>
+                <span class="info-box-number">{{ $interiorDam }}</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+    </div>
+
+    <div class="col-md-2 col-sm-6 col-12">
+        <div class="info-box mb-3 bg-danger">
+            <span class="info-box-icon"><i class="fas fa-wrench"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Lainnya</span>
+                <span class="info-box-number">{{ $otherDam }}</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+    </div>
+</div>
+<hr>
 <!-- Chart's container -->
 <div class="card">
     <div class="card-body">
@@ -252,12 +332,12 @@
 </div>
 
 <!-- Chart's container -->
-<!-- <div class="card">
+<div class="card">
     <div class="card-body">
         <h5 class="card-title">Favorite Car</h5>
         <div id="chartCar" style="height: 300px;"></div>
     </div>
-</div> -->
+</div>
 
 @endif
 @endsection
@@ -276,24 +356,23 @@
             .legend({
                 position: 'bottom'
             })
-            .datasets([{
+            .datasets(['bar', 'bar', {
                 type: 'line',
                 fill: false
-            }, 'bar'])
+            }])
     });
 
 </script>
 
 <script>
-    // const chartCar = new Chartisan({
-    //     el: '#chartCar',
-    //     url: '@chart("car_chart")',
-    //     hooks: new ChartisanHooks()
-    //         .legend({
-    //             position: 'bottom'
-    //         })
-    //         .datasets('doughnut')
-    // });
+    const chartCar = new Chartisan({
+        el: '#chartCar',
+        url: '@chart("car_chart")',
+        hooks: new ChartisanHooks()
+            .legend({
+                position: 'bottom'
+            })
+    });
 
 </script>
 

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Payment;
 use App\Models\Booking;
 use App\Models\Car;
+use App\Models\Damage;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -79,7 +80,32 @@ class HomeController extends Controller
             $at = Car::where('transmition','AT')->count();
             $mt = Car::where('transmition','MT')->count();
 
-            return view('admin.dashboard', compact('incomeMonth','incomeDay','customer','bookedCar','returnedCar','unpaid','month','favorite','at','mt','yearNow','yearLast'));
+            $engineDam = Damage::where([
+                ['status','damaged'],
+                ['category','Mesin']
+            ])->count();
+            $bodyDam = Damage::where([
+                ['status','damaged'],
+                ['category','Body']
+            ])->count();
+            $lampDam = Damage::where([
+                ['status','damaged'],
+                ['category','Lampu']
+            ])->count();
+            $tireDam = Damage::where([
+                ['status','damaged'],
+                ['category','Ban']
+            ])->count();
+            $interiorDam = Damage::where([
+                ['status','damaged'],
+                ['category','Interior']
+            ])->count();
+            $otherDam = Damage::where([
+                ['status','damaged'],
+                ['category','Lainnya']
+            ])->count();
+
+            return view('admin.dashboard', compact('incomeMonth','incomeDay','customer','bookedCar','returnedCar','unpaid','month','favorite','at','mt','yearNow','yearLast','engineDam','bodyDam','lampDam','tireDam','interiorDam','otherDam'));
         }
     }
 
