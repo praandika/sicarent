@@ -33,7 +33,7 @@
                 Laporan Mobil
             </div>
             <div class="card-body">
-                <a href="#" class="btn btn-info"><i class="fas fa-car"></i> Cari Laporan</a>
+                <a href="{{ route('report.car') }}" class="btn btn-info"><i class="fas fa-car"></i> Cari Laporan</a>
             </div>
             <div class="card-footer text-muted">
             </div>

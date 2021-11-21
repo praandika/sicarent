@@ -38,10 +38,10 @@
                                 <td> {{ $o->category }} </td>
                                 <td> {{ $o->damage_count }} </td>
                                 <td>
-                                    <a href="{{ route('damage.show',$o->id) }}" class="btn btn-info"
+                                    <a href="{{ route('damage.show',$o->car_id) }}" class="btn btn-info"
                                         data-toggle="tooltip" data-placement="top" title="Detail"><i
                                             class="fas fa-eye"></i></a>
-                                    <a href="{{ route('damage.edit',$o->id) }}" class="btn btn-primary"
+                                    <a href="{{ route('damage.edit',$o->car_id) }}" class="btn btn-primary"
                                         data-toggle="tooltip" data-placement="top" title="Edit"><i
                                             class="fas fa-pencil-alt"></i></a>
                             </tr>

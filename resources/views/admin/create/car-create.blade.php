@@ -93,6 +93,14 @@
 
                     <div class="row">
                         <div class="col-lg-4">
+                            <!-- Kilometer -->
+                            <div class="form-group">
+                                <label for="kilometers">Kilometer</label>
+                                <input type="number" id="kilometers" class="form-control" name="kilometers"
+                                    placeholder="Masukkan kilometer mobil..." value="{{ old('kilometers') }}" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
                             <!-- Harga -->
                             <div class="form-group">
                                 <label for="price">Harga</label>
@@ -100,7 +108,7 @@
                                     placeholder="Masukkan harga sewa..." value="{{ old('price') }}" required>
                             </div>
                         </div>
-                        <div class="col-lg-8">
+                        <div class="col-lg-4">
                             <!-- Featured Image -->
                             <div class="form-group">
                                 <label for="price">Foto Mobil</label>

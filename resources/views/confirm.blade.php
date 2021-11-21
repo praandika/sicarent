@@ -55,6 +55,8 @@
                                     <th>: Rp {{ number_format($o->total, 0, ',', '.') }}<th>
                                 </tr>
                             </table>
+                            <h4 class="mt-3">Transfer to BCA a/n Arya</h4>
+                            <h4 style="color: blue;">6254172879</h4>
                             <label for="">Upload Payment Proof</label> <br>
                             <input type="file" name="proof" id="proof" required> <br>
                             <button type="submit" class="btn btn-secondary py-3 px-4 mt-3">Confirm Payment</button>

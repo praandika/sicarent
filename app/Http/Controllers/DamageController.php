@@ -17,7 +17,7 @@ class DamageController extends Controller
 
     public function index(){
         $data = Damage::join('cars','damages.car_id','=','cars.id')
-        ->select(DB::raw('count(description) as damage_count, damages.id, cars.car_name, cars.kilometers, damages.category', 'cars.transmition', 'damages.status'))
+        ->select(DB::raw('count(description) as damage_count, damages.id, cars.car_name, cars.kilometers, damages.category, cars.transmition, damages.status, cars.id as car_id'))
         ->where('damages.status','damaged')
         ->groupBy('cars.car_name')
         ->orderBy('cars.car_name','desc')
@@ -26,12 +26,17 @@ class DamageController extends Controller
         return view('admin.damage', compact('data'));
     }
 
-    public function show($id){
+    public function show($carId){
+        $car = Car::find($carId);
+
         $data = Damage::join('cars','damages.car_id','=','cars.id')
-        ->where('damages.id',$id)
+        ->where([
+                ['cars.id',$carId],
+                ['damages.status','damaged']
+            ])
         ->get();
 
-        return view('admin.damage-show', compact('data'));
+        return view('admin.damage-show', compact('data','car'));
     }
 
     public function create(){
@@ -40,7 +45,11 @@ class DamageController extends Controller
     }
 
     public function store(Request $req){
-        $car_id = $req->car_id;
+        if (($req->plate == "") || ($req->car_name == "") || ($req->transmition == "") || ($req->tahun == "")) {
+            alert()->warning('Warning','Field input tidak boleh kosong!');
+            return redirect()->back();
+        } else {
+            $car_id = $req->car_id;
         for ($i=0; $i < count($req->category); $i++) { 
             Damage::create([
                 'car_id' => $car_id,
@@ -50,21 +59,29 @@ class DamageController extends Controller
         }
         toast('Data berhasil disimpan','success')->autoClose(1500);
         return redirect()->route('damage.read');
+        }
     }
 
-    public function edit($id){
+    public function edit($carId){
+        $car = Car::find($carId);
+
         $data = Damage::join('cars','damages.car_id','=','cars.id')
-        ->where('damages.id',$id)
+        ->where([
+            ['cars.id',$carId],
+            ['damages.status','damaged']
+        ])
+        ->select('damages.id' ,'category', 'description', 'damages.created_at')
         ->get();
 
-        return view('admin.damage_edit', compact('data'));
+        return view('admin.edit.damage-edit', compact('data','car'));
     }
 
-    public function update(Request $req){
-        $data = Damage::find($req->id);
+    public function update($id){
+        $data = Damage::find($id);
         $data->status = "fixed";
         $data->save();
 
+        toast('Kerusakan berhasil diperbaiki','success')->autoClose(1500);
         return redirect()->back();
     }
 }

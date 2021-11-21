@@ -7,6 +7,7 @@ use App\Models\Payment;
 use App\Models\Booking;
 use App\Exports\BookingExport;
 use App\Exports\PaymentExport;
+use App\Exports\CarExport;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ReportController extends Controller
@@ -58,5 +59,9 @@ class ReportController extends Controller
 
     public function exportPay($awal, $akhir){
         return (new PaymentExport)->awal($awal)->akhir($akhir)->download('Payment_report_'.$awal.'-'.$akhir.'.xlsx');
+    }
+
+    public function exportCar(){
+        return Excel::download(new CarExport, 'car-report.xlsx');
     }
 }

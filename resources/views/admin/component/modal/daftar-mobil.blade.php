@@ -26,7 +26,7 @@
                             @php($no = 1)
                         @forelse($data as $o)
                             <tr class="klik" 
-                            data-carId="{{ $o->car_id }}"
+                            data-carId="{{ $o->id }}"
                             data-carName="{{ $o->car_name }}"
                             data-plate="{{ $o->plate_number }}"
                             data-transmition="{{ $o->transmition }}"

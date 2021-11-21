@@ -70,6 +70,8 @@ class BookingController extends Controller
             ['car_id',$req->id],
             ['return_date',$req->end],
         ])->count();
+
+        
         // Jika tgl sama maka > 0
         // dd($start, $end);
 
@@ -103,8 +105,17 @@ class BookingController extends Controller
             alert()->success('Welcome',Auth::user()->name.' please confirm your payment to get invoice');
             return redirect()->route('dashboard');
 
-        } else {
+        } elseif(($start == 1) && ($end == 1)) {
             alert()->warning('Warning','Booking date is full, please choose another date');
+            return redirect()->back()->withInput();
+        } elseif(($start == 1) || ($end == 0)) {
+            alert()->warning('Warning','Booking date is full, please choose another date');
+            return redirect()->back()->withInput();
+        } elseif(($start == 0) && ($end == 1)) {
+            alert()->warning('Warning','Booking date is full, please choose another date');
+            return redirect()->back()->withInput();
+        } else{
+            alert()->warning('Warning','Please choose booking date');
             return redirect()->back()->withInput();
         }
     }

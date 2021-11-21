@@ -31,6 +31,7 @@ class CarController extends Controller
         $car->car_name = $req->car_name;
         $car->car_brand = $req->car_brand;
         $car->transmition = $req->transmition;
+        $car->kilometers = $req->kilometers;
         $car->car_type = $req->car_type;
         $car->engine_vol = $req->engine_vol;
         $car->price = $req->price;
@@ -62,6 +63,7 @@ class CarController extends Controller
             $car->car_name = $req->car_name;
             $car->car_brand = $req->car_brand;
             $car->transmition = $req->transmition;
+            $car->kilometers = $req->kilometers;
             $car->car_type = $req->car_type;
             $car->engine_vol = $req->engine_vol;
             $car->price = $req->price;
@@ -78,6 +80,7 @@ class CarController extends Controller
             $car->car_name = $req->car_name;
             $car->car_brand = $req->car_brand;
             $car->transmition = $req->transmition;
+            $car->kilometers = $req->kilometers;
             $car->car_type = $req->car_type;
             $car->engine_vol = $req->engine_vol;
             $car->price = $req->price;

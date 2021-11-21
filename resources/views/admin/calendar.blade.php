@@ -36,7 +36,7 @@
                 @foreach($calendar as $o) {
                     title: '{{ $o->name }} - {{ $o->car_name }}',
                     start: '{{ $o->booking_date }}',
-                    end: '{{ $o->return_date }}',
+                    end: '{{ $o->return_date }} 09:00:00',
                 },
                 @endforeach
             ]

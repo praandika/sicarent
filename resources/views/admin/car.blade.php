@@ -35,6 +35,7 @@
                                     <th>Mobil</th>
                                     <th>Brand</th>
                                     <th>Transmisi</th>
+                                    <th>Kilometer</th>
                                     <th>Tipe</th>
                                     <th>Volume</th>
                                     <th>Kapasitas</th>
@@ -60,6 +61,7 @@
                                     <td> {{ $o->car_name }} </td>
                                     <td> {{ $o->car_brand }} </td>
                                     <td> {{ $o->transmition  }} </td>
+                                    <td> {{ $o->kilometers  }} KM</td>
                                     <td> {{ $o->car_type }} </td>
                                     <td> {{ $o->engine_vol }} </td>
                                     <td> {{ $o->car_capacity }} </td>
@@ -83,6 +85,7 @@
                                     <th>Mobil</th>
                                     <th>Brand</th>
                                     <th>Transmisi</th>
+                                    <th>Kilometer</th>
                                     <th>Tipe</th>
                                     <th>Volume</th>
                                     <th>Kapasitas</th>

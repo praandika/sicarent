@@ -14,6 +14,8 @@
             <div class="image">
             @if((Auth::user()->access == "admin") || (Auth::user()->access == "head"))
                 <img src="{{ asset('avatar/icon-user-white.png') }}" class="img-circle elevation-2" alt="User Image">
+            @elseif(Auth::user()->google_id == "")
+                <img src="{{ asset('avatar/icon-user-white.png') }}" class="img-circle elevation-2" alt="User Image">
             @else
                 <img src="{{ Auth::user()->avatar }}" class="img-circle elevation-2" alt="User Image">
             @endif
