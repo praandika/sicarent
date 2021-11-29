@@ -49,9 +49,6 @@
                         </p>
                     </a>
                 </li>
-                @endif
-
-                @if(Auth::user()->access == "admin")
                 <li class="nav-item">
                     <a href="{{ route('user.read') }}" class="nav-link">
                         <i class="nav-icon fas fa-user"></i>
@@ -60,6 +57,9 @@
                         </p>
                     </a>
                 </li>
+                @endif
+
+                @if(Auth::user()->access == "admin")
                 <li class="nav-item">
                     <a href="{{ route('car.read') }}" class="nav-link">
                         <i class="nav-icon fas fa-car"></i>

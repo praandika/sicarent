@@ -48,6 +48,7 @@
                     <label for="phone">Kontak</label>
                     <input type="text" id="phone" class="form-control" value="{{ $o->phone }}" placeholder="Kontak (WA / No. Telp)" name="phone">
                 </div>
+                @if(Auth::user()->access == "head")
                 <!-- Access -->
                 <div class="form-group">
                     <label for="access">Hak Akses</label>
@@ -67,7 +68,7 @@
                         @endif
                     </select>
                 </div>
-
+                @endif
             </div>
             <div class="modal-footer">
                 <button type="reset" class="btn btn-secondary">Reset</button>

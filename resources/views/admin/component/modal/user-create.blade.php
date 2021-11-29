@@ -15,7 +15,7 @@
                     <!-- Name -->
                     <div class="form-group">
                         <label for="name">Nama</label>
-                        <input type="text" class="form-control" id="name"
+                        <input type="text" class="form-control" id="nameInput"
                             name="name" placeholder="Masukkan nama..." value="{{ old('name') }}" required>
                     </div>
                     <!-- Email -->
@@ -41,6 +41,7 @@
                         <label for="phone">Kontak</label>
                         <input type="text" id="phone" class="form-control" name="phone" placeholder="Kontak (No. HP / Whatsapp)" value="{{ old('phone') }}" required>
                     </div>
+                    @if(Auth::user()->access == "head")
                     <!-- Access -->
                     <div class="form-group">
                         <label for="access">Hak Akses</label>
@@ -50,6 +51,7 @@
                             <option value="head">Pimpinan</option>
                         </select>
                     </div>
+                    @endif
 
                     <!-- Password -->
                     <div class="form-group">
@@ -82,11 +84,18 @@
 
 @push('after-script')
 <script>
+    function isCharacterALetter(char) {
+        return (/^[A-Za-z]+$/).test(char);
+    }
+
     function store() {
+        let $user = document.getElementById('nameInput').value;
         let $pass = document.getElementById('password').value;
         let $confirm = document.getElementById('confirm').value;
         let $form = document.getElementById('store-form');
         let $countPass = String($pass).length;
+
+        alert(isCharacterALetter($user));
 
         if ($countPass < 8) {
             console.log($countPass < 8);
