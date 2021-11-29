@@ -14,7 +14,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
 </head>
-
+@include('sweetalert::alert')
 @yield('login-content')
 
 <!-- jQuery -->

@@ -29,6 +29,8 @@ Route::get('detail/2/{id}/{price}', [App\Http\Controllers\BookingController::cla
 // Payment
 Route::get('confirm/{id}', [App\Http\Controllers\PaymentController::class, 'confirm'])->name('confirm');
 Route::post('paymentedit', [App\Http\Controllers\PaymentController::class, 'paymentEdit'])->name('payment.edit');
+Route::get('proof/{invoice}', [App\Http\Controllers\PaymentController::class, 'proofEdit'])->name('proof.edit');
+Route::post('proof/update', [App\Http\Controllers\PaymentController::class, 'proofUpdate'])->name('proof.update');
 // END Payment
 
 /**Auth Route */
@@ -124,3 +126,7 @@ Route::post('damage/store', [App\Http\Controllers\DamageController::class, 'stor
 Route::get('damage/edit/{car}', [App\Http\Controllers\DamageController::class, 'edit'])->name('damage.edit');
 Route::post('damage/update/{id}', [App\Http\Controllers\DamageController::class, 'update'])->name('damage.update');
 // END Damage
+
+// Reset Password
+Route::post('update/pass', [App\Http\Controllers\UserController::class, 'updatePass'])->name('pass.update');
+// END Reset Password

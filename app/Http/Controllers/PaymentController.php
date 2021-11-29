@@ -33,11 +33,26 @@ class PaymentController extends Controller
         ]);
 
         Payment::where('invoice',$req->invoice)->update([
-            'payment_status' => "paid",
+            'payment_status' => "pending",
             'proof' => $file_name,
         ]);
 
-        return redirect('invoice/'.$req->invoice);
+        return redirect()->route('pay.history');
+    }
+
+    public function proofEdit($invoice){
+        $data = Payment::join('bookings','payments.booking_id','=','bookings.id')
+            ->where('invoice',$invoice)
+            ->get();
+        return view('admin.edit.proof', compact('data'));
+    }
+
+    public function proofUpdate(Request $req){
+        Payment::where('invoice',$req->invoice)->update([
+            'payment_status' => "paid",
+        ]);
+        toast('Pembayaran Sukses','success')->autoClose(1500);
+        return redirect()->route('pay.history');
     }
 
     public function invoice($invoice){

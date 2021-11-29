@@ -87,4 +87,9 @@ class UserController extends Controller
         }
         
     }
+
+    public function updatePass(Request $req){
+        $data = User::where('email',$req->email)->get();
+        dd($data);
+    }
 }

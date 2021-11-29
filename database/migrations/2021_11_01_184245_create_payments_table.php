@@ -23,7 +23,7 @@ class CreatePaymentsTable extends Migration
             $table->integer('changes');
             $table->integer('overtime');
             $table->text('proof')->nullable();
-            $table->enum('payment_status',['unpaid','paid']);
+            $table->enum('payment_status',['unpaid','pending','paid']);
             $table->timestamps();
         });
     }

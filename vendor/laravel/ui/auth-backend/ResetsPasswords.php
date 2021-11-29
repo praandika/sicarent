@@ -29,7 +29,7 @@ trait ResetsPasswords
         $token = $request->route()->parameter('token');
 
         return view('auth.passwords.reset')->with(
-            ['token' => $token, 'email' => $request->email]
+            ['email' => $request->email]
         );
     }
 
