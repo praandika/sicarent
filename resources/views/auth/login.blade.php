@@ -66,7 +66,7 @@
 
       <p class="mb-1">
         @if (Route::has('password.request'))
-            <a href="{{ route('password.request') }}">
+            <a href="{{ route('forget.password.get') }}">
                 I forgot my password
             </a>
         @endif

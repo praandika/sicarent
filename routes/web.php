@@ -130,3 +130,10 @@ Route::post('damage/update/{id}', [App\Http\Controllers\DamageController::class,
 // Reset Password
 Route::post('update/pass', [App\Http\Controllers\UserController::class, 'updatePass'])->name('pass.update');
 // END Reset Password
+
+// Forgot Password
+Route::get('forget-password', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
+Route::post('forget-password', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post'); 
+Route::get('reset-password/{token}/{email}', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
+Route::post('reset-password', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
+// END Forgot Password
