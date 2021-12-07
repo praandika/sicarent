@@ -49,55 +49,54 @@
                     </div>
 
                     <div class="col-lg-4 text-right">
-                        <a href="{{ url('pdf/book/'.$awal.'/'.$akhir) }}" class="btn btn-success"><i
+                        <a href="{{ url('pdf/bookname/'.$user) }}" class="btn btn-success"><i
                                 class="far fa-file-pdf"></i> Print</a>
                     </div>
                 </div>
-            </div>
-            <div class="table-responsive">
-                <table id="datatb" class="table table-bordered table-striped">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Invoice</th>
-                            <th>Mobil</th>
-                            <th>Booking Date</th>
-                            <th>Return Date</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php($no = 1)
-                        @forelse($data as $o)
-                        <tr>
-                            <td> {{ $no++  }} </td>
-                            <td> {{ $o->book_code }} </td>
-                            <td> {{ $o->car_name }} </td>
-                            <td> {{ Carbon\Carbon::parse($o->booking_date)->format('D d M Y') }} </td>
-                            <td> {{ Carbon\Carbon::parse($o->return_date)->format('D d M Y') }} </td>
-                            <td> {{ $o->booking_status  }} </td>
-                        </tr>
-                        @empty
-                        <tr>
-                            <td colspan="6" class="text-center">no data available</td>
-                        </tr>
-                        @endforelse
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>#</th>
-                            <th>Invoice</th>
-                            <th>Mobil</th>
-                            <th>Booking Date</th>
-                            <th>Return Date</th>
-                            <th>Status</th>
-                        </tr>
-                    </tfoot>
-                </table>
+                <div class="table-responsive">
+                    <table id="datatb" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Invoice</th>
+                                <th>Mobil</th>
+                                <th>Booking Date</th>
+                                <th>Return Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php($no = 1)
+                            @forelse($data as $o)
+                            <tr>
+                                <td> {{ $no++  }} </td>
+                                <td> {{ $o->book_code }} </td>
+                                <td> {{ $o->car_name }} </td>
+                                <td> {{ Carbon\Carbon::parse($o->booking_date)->format('D d M Y') }} </td>
+                                <td> {{ Carbon\Carbon::parse($o->return_date)->format('D d M Y') }} </td>
+                                <td> {{ $o->booking_status  }} </td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="6" class="text-center">no data available</td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>#</th>
+                                <th>Invoice</th>
+                                <th>Mobil</th>
+                                <th>Booking Date</th>
+                                <th>Return Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 @endsection
 

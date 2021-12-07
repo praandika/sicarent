@@ -109,7 +109,11 @@ Route::get('report/pay', [App\Http\Controllers\ReportController::class, 'payRepo
 
 Route::get('report/book/search', [App\Http\Controllers\ReportController::class, 'bookReportSearch'])->name('report.book.search');
 
+Route::get('report/book/search_name', [App\Http\Controllers\ReportController::class, 'bookReportSearchName'])->name('report.book.search_name');
+
 Route::get('report/pay/search', [App\Http\Controllers\ReportController::class, 'payReportSearch'])->name('report.pay.search');
+
+Route::get('report/pay/search_name', [App\Http\Controllers\ReportController::class, 'payReportSearchName'])->name('report.pay.search_name');
 
 Route::get('export/book/{awal}/{akhir}', [App\Http\Controllers\ReportController::class, 'exportBook'])->name('export');
 
@@ -119,7 +123,15 @@ Route::get('report/car', [App\Http\Controllers\ReportController::class, 'exportC
 // END Laporan
 
 // PDF
-Route::get('pdf/book/{awal?}/{akhir?}/{nama?}', [App\Http\Controllers\ReportController::class, 'bookPDF']);
+Route::get('pdf/book/{awal}/{akhir}', [App\Http\Controllers\ReportController::class, 'bookPDF']);
+
+Route::get('pdf/bookname/{user}', [App\Http\Controllers\ReportController::class, 'bookNamePDF']);
+
+Route::get('pdf/pay/{awal}/{akhir}', [App\Http\Controllers\ReportController::class, 'payPDF']);
+
+Route::get('pdf/payname/{user}', [App\Http\Controllers\ReportController::class, 'payNamePDF']);
+
+Route::get('pdf/car/', [App\Http\Controllers\ReportController::class, 'carPDF'])->name('car.pdf');
 // END PDF
 
 // Damage

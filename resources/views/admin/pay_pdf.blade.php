@@ -15,6 +15,7 @@
 
         table{
             border-collapse: collapse;
+            width: 100%;
         }
 
         th{
@@ -29,6 +30,7 @@
         table tr td,
         table tr th{
             padding: 10px;
+            text-align: left;
         }
     </style>
 </head>
@@ -39,7 +41,7 @@
             <div class="card">
                 <div class="table-responsive">
                     <center>
-                        <h2>Laporan Sewa</h2>
+                        <h2>Laporan Pembayaran</h2>
                     </center>
                     <p class="tgl">
                         Periode : {{ $awal }} - {{ $akhir }} <br>
@@ -51,8 +53,7 @@
                                 <th>No</th>
                                 <th>Invoice</th>
                                 <th>Mobil</th>
-                                <th>Booking Date</th>
-                                <th>Return Date</th>
+                                <th>Total</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
@@ -61,17 +62,24 @@
                             @forelse($data as $o)
                             <tr>
                                 <td> {{ $no++  }} </td>
-                                <td> {{ $o->book_code }} </td>
-                                <td> {{ $o->car_name }} </td>
-                                <td> {{ Carbon\Carbon::parse($o->booking_date)->format('D d M Y') }} </td>
-                                <td> {{ Carbon\Carbon::parse($o->return_date)->format('D d M Y') }} </td>
-                                <td> {{ $o->booking_status  }} </td>
+                                <td> {{ $o->invoice }} </td>
+                                <td> {{ $o->booking->car->car_name }} </td>
+                                <td> Rp {{ number_format($o->total, 0, ',', '.') }} </td>
+                                <td> {{ $o->payment_status  }} </td>
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="6" class="text-center">no data available</td>
+                                <td colspan="5" class="text-center">no data available</td>
                             </tr>
                             @endforelse
+                            <tr>
+                                <td colspan="3">
+                                    Total
+                                </td>
+                                <td>
+                                    Rp {{ number_format($total, 0, ',', '.') }}
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

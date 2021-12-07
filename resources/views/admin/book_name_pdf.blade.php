@@ -42,8 +42,7 @@
                         <h2>Laporan Sewa</h2>
                     </center>
                     <p class="tgl">
-                        Periode : {{ $awal }} - {{ $akhir }} <br>
-                        printed on : {{ $printDate }}
+                        user : {{ $name }},  printed on : {{ $printDate }}
                     </p>
                     <table id="datatb" class="table table-bordered table-striped">
                         <thead>
