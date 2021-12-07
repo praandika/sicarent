@@ -9,6 +9,8 @@ use App\Exports\BookingExport;
 use App\Exports\PaymentExport;
 use App\Exports\CarExport;
 use Maatwebsite\Excel\Facades\Excel;
+use PDF;
+use Carbon\Carbon;
 
 class ReportController extends Controller
 {
@@ -25,7 +27,13 @@ class ReportController extends Controller
         $data = Booking::join('users','bookings.user_id','=','users.id')
         ->join('cars','bookings.car_id','=','cars.id')
         ->get();
-        return view('admin.report_book', compact('data'));
+
+        $nama = Booking::join('users','bookings.user_id','=','users.id')
+        ->join('cars','bookings.car_id','=','cars.id')
+        ->select('users.name','users.id')
+        ->groupBy('users.name')
+        ->get();
+        return view('admin.report_book', compact('data','nama'));
     }
 
     public function payReport(){
@@ -35,13 +43,54 @@ class ReportController extends Controller
     }
 
     public function bookReportSearch(Request $req){
-        $awal = $req->awal;
-        $akhir = $req->akhir;
-        $data = Booking::join('users','bookings.user_id','=','users.id')
-        ->join('cars','bookings.car_id','=','cars.id')
-        ->whereBetween('booking_date', [$awal, $akhir])
-        ->get();
-        return view('admin.report_book_search', compact('data','awal','akhir'));
+        if ($req->nama == "") {
+            $nama = Booking::join('users','bookings.user_id','=','users.id')
+            ->join('cars','bookings.car_id','=','cars.id')
+            ->select('users.name','users.id')
+            ->groupBy('users.name')
+            ->get();
+
+            $awal = $req->awal;
+            $akhir = $req->akhir;
+            $data = Booking::join('users','bookings.user_id','=','users.id')
+            ->join('cars','bookings.car_id','=','cars.id')
+            ->whereBetween('booking_date', [$awal, $akhir])
+            ->get();
+            return view('admin.report_book_search', compact('data','awal','akhir','nama'));
+        } elseif(($req->awal == "") && ($req->akhir == "")) {
+            $nama = Booking::join('users','bookings.user_id','=','users.id')
+            ->join('cars','bookings.car_id','=','cars.id')
+            ->select('users.name','users.id')
+            ->groupBy('users.name')
+            ->get();
+
+            $user = $req->nama;
+            $data = Booking::join('users','bookings.user_id','=','users.id')
+            ->join('cars','bookings.car_id','=','cars.id')
+            ->where('users.id', $req->nama)
+            ->get();
+            return view('admin.report_book_search', compact('data','nama','user'));
+        } elseif(($req->awal == "") && ($req->akhir == "") && ($req->nama == "")){
+            alert()->warning('Pastikan form tidak kosong!');
+            return redirect()->back();
+        }else{
+            $nama = Booking::join('users','bookings.user_id','=','users.id')
+            ->join('cars','bookings.car_id','=','cars.id')
+            ->select('users.name','users.id')
+            ->groupBy('users.name')
+            ->get();
+
+            $awal = $req->awal;
+            $akhir = $req->akhir;
+            $data = Booking::join('users','bookings.user_id','=','users.id')
+            ->join('cars','bookings.car_id','=','cars.id')
+            ->whereBetween('booking_date', [$awal, $akhir])
+            ->where('name', $req->nama)
+            ->get();
+            return view('admin.report_book_search', compact('data','awal','akhir','nama'));
+        }
+        
+        
     }
 
     public function payReportSearch(Request $req){
@@ -63,5 +112,17 @@ class ReportController extends Controller
 
     public function exportCar(){
         return Excel::download(new CarExport, 'car-report.xlsx');
+    }
+
+    public function bookPDF($awal = null, $akhir = null, $nama = null){
+        $data = Booking::join('users','bookings.user_id','=','users.id')
+        ->join('cars','bookings.car_id','=','cars.id')
+        ->whereBetween('booking_date', [$awal, $akhir])
+        ->get();
+
+        $printDate = Carbon::now('GMT+8')->format('j F Y');
+
+        $pdf = PDF::loadview('admin.book_pdf', compact('data','printDate'))->setOptions(['defaultFont' => 'sans-serif']);
+        return $pdf->stream('laporan-booking-'.$awal.'-'.$akhir.'-'.$nama.'.pdf');
     }
 }

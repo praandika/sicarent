@@ -12,16 +12,28 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-8">
-                        <form action="{{ route('report.book.search') }}" class="form-inline">
-                            <div class="form-group mb-2">
+                        <form action="{{ route('report.book.search') }}" class="form-row">
+                            <div class="col">
                                 <label for="awal" class="sr-only">Periode awal</label>
                                 <input type="date" class="form-control" id="awal" name="awal" value="{{ old('awal') }}">
                             </div>
-                            <div class="form-group mx-sm-3 mb-2">
+                            <div class="col">
                                 <label for="akhir" class="sr-only">Periode akhir</label>
                                 <input type="date" class="form-control" id="akhir" name="akhir"
                                     value="{{ old('akhir') }}">
                             </div>
+                            <div class="col">
+                                <label for="nama" class="sr-only">Search by Name</label>
+                                <select name="nama" id="nama" class="js-select-2">
+                                    <option value="">Search by Name</option>
+                                    @forelse($nama as $a)
+                                        <option value="{{ $a->id }}">{{ $a->name }}</option>
+                                    @empty
+                                        <option readonly>no data</option>
+                                    @endforelse
+                                </select>
+                            </div>
+
                             <button type="submit" class="btn btn-primary mb-2"><i class="fas fa-search"></i>
                                 Cari</button>
                         </form>
@@ -82,5 +94,11 @@
         $("#datatb").DataTable();
     });
 
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('.js-select-2').select2();
+    });
 </script>
 @endpush

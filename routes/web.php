@@ -118,6 +118,10 @@ Route::get('export/pay/{awal}/{akhir}', [App\Http\Controllers\ReportController::
 Route::get('report/car', [App\Http\Controllers\ReportController::class, 'exportCar'])->name('report.car');
 // END Laporan
 
+// PDF
+Route::get('pdf/book/{awal?}/{akhir?}/{nama?}', [App\Http\Controllers\ReportController::class, 'bookPDF']);
+// END PDF
+
 // Damage
 Route::get('damage', [App\Http\Controllers\DamageController::class, 'index'])->name('damage.read');
 Route::get('damage/show/{car}', [App\Http\Controllers\DamageController::class, 'show'])->name('damage.show');
