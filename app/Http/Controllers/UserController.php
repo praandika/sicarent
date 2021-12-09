@@ -17,7 +17,9 @@ class UserController extends Controller
     
     public function index()
     {
-        $data = User::where('access','<>','user')->get();
+        $data = User::where('access','<>','user')
+        ->orderBy('id', 'desc')
+        ->get();
         $title = "User";
         return view('admin.user', compact('data','title'));
     }
@@ -36,18 +38,31 @@ class UserController extends Controller
             return redirect()->back()->withInput();
         } else {
             if ($confirm === $pass) {
-                $data = new User;
-                $data->name = $req->name;
-                $data->email = $req->email;
-                $data->username = $req->username;
-                $data->gender = $req->gender;
-                $data->phone = $req->phone;
-                $data->access = $req->access;
-                $data->password = bcrypt($pass);
-                $data->save();
-                toast('Data berhasil disimpan','success')->autoClose(1500);
-                return redirect()->back();
-    
+                if (Auth::user()->access == "admin") {
+                    $data = new User;
+                    $data->name = $req->name;
+                    $data->email = $req->email;
+                    $data->username = $req->username;
+                    $data->gender = $req->gender;
+                    $data->phone = $req->phone;
+                    $data->access = "admin";
+                    $data->password = bcrypt($pass);
+                    $data->save();
+                    toast('Data berhasil disimpan','success')->autoClose(1500);
+                    return redirect()->back();
+                } else {
+                    $data = new User;
+                    $data->name = $req->name;
+                    $data->email = $req->email;
+                    $data->username = $req->username;
+                    $data->gender = $req->gender;
+                    $data->phone = $req->phone;
+                    $data->access = $req->access;
+                    $data->password = bcrypt($pass);
+                    $data->save();
+                    toast('Data berhasil disimpan','success')->autoClose(1500);
+                    return redirect()->back();
+                }
             }else{
                 alert()->warning('Warning','Password tidak cocok!');
                 return redirect()->back()->withInput();
@@ -56,16 +71,28 @@ class UserController extends Controller
     }
 
     public function update(Request $req){
-        $data = User::find($req->id);
-        $data->name = $req->name;
-        $data->email = $req->email;
-        $data->username = $req->username;
-        $data->username = $req->gender;
-        $data->phone = $req->phone;
-        $data->access = $req->access;
-        $data->save();
-        toast('Data berhasil disimpan','success')->autoClose(1500);
-        return redirect()->route('user.read');
+        if (Auth::user()->access == "admin") {
+            $data = User::find($req->id);
+            $data->name = $req->name;
+            $data->email = $req->email;
+            $data->username = $req->username;
+            $data->gender = $req->gender;
+            $data->phone = $req->phone;
+            $data->save();
+            toast('Data berhasil disimpan','success')->autoClose(1500);
+            return redirect()->route('user.read');
+        }else{
+            $data = User::find($req->id);
+            $data->name = $req->name;
+            $data->email = $req->email;
+            $data->username = $req->username;
+            $data->gender = $req->gender;
+            $data->phone = $req->phone;
+            $data->access = $req->access;
+            $data->save();
+            toast('Data berhasil disimpan','success')->autoClose(1500);
+            return redirect()->route('user.read');
+        }
     }
 
     public function adminpass(Request $req){

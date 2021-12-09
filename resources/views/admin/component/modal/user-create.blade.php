@@ -95,7 +95,7 @@
         let $form = document.getElementById('store-form');
         let $countPass = String($pass).length;
 
-        alert(isCharacterALetter($user));
+        console.log(isCharacterALetter($user));
 
         if ($countPass < 8) {
             console.log($countPass < 8);
